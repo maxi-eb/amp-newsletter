@@ -7,17 +7,7 @@
         <meta name="format-detection" content="address=no">
         <link rel="stylesheet" type="text/css" href="styles.css">
 
-         <!-- AMP -->
-            <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <!-- #### Setup -->
-    <!-- Import `amp-selector` component in the header which we'll use to implement the tab switching. -->
-    <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
-    <!-- Import `amp-carousel` component in the header which we'll use as a sample tab content -->
-    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
-    <!-- Import `amp-bind` component in the header which we'll use to switch tabs via buttons -->
-    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
-    <!-- There's just a bit of css that's needed -->
-        <!-- END AMP -->
+
 
     </head>
 
@@ -103,15 +93,85 @@
         }
     </style>
                 <tr><td>
-
-                <amp-selector on="select:AMP.setState({selectedTab: event.targetOption})" [selected]="selectedTab" role="tablist" layout="container" class="ampTabContainer">
+<!-- - - - - - - - - -TABS & CARROUSEL  - - - - - - - - -->
+<amp-selector on="select:AMP.setState({selectedTab: event.targetOption})" [selected]="selectedTab" role="tablist" layout="container" class="ampTabContainer">
                     <div role="tab" class="tabButton" selected option="a">ONE</div>
-                    <div role="tabpanel" class="tabContent">ONE</div>
+                    <div role="tabpanel" class="tabContent">
+
+                    <!-- - - - - - - - - - START CARROUSEL  - - - - - - - - -->
+                    <amp-carousel height="300" layout="fixed-height" type="carousel" class="i-amphtml-element i-amphtml-layout-fixed-height i-amphtml-layout-size-defined i-amphtml-carousel-has-controls i-amphtml-layout" style="width: 500px;height: 300px;">
+
+
+
+                    <div class="i-amphtml-scrollable-carousel-container">
+                    <amp-img src="https://ci5.googleusercontent.com/proxy/XK5X0fFko028jrHps1ChyE-06yq_Z1eTZSy35j93K5AFwz1qrLJrd2spmPd3sc03AMYoEENHeSpFloQNasgnU0-50INYHf7QQrXICpB3GPInwY0kiLM0ybJfJpW2g037XxzjirUsCkCQbRvPatPtZTWkJ-gM3gV2KD8nEEzTeSpTqdsBup62eebtZVhQ_ysvLNWER6LmNuTq71ISmg9bUiBpbLETkrRSKawwRJh754L5ZzFwwo2J5jDuGDdKLkaA5cvL7HpZ=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F42311529%2F137284379483%2F1%2Foriginal.jpg?h=120&w=240&rect=0%2C60%2C1920%2C960&s=33a9ca5deaed888248924c4049210276" width="400" height="300" alt="a sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="a sample image" class="i-amphtml-fill-content i-amphtml-replaced-content" src=""></amp-img>
+
+                    <amp-img src="https://ci5.googleusercontent.com/proxy/XK5X0fFko028jrHps1ChyE-06yq_Z1eTZSy35j93K5AFwz1qrLJrd2spmPd3sc03AMYoEENHeSpFloQNasgnU0-50INYHf7QQrXICpB3GPInwY0kiLM0ybJfJpW2g037XxzjirUsCkCQbRvPatPtZTWkJ-gM3gV2KD8nEEzTeSpTqdsBup62eebtZVhQ_ysvLNWER6LmNuTq71ISmg9bUiBpbLETkrRSKawwRJh754L5ZzFwwo2J5jDuGDdKLkaA5cvL7HpZ=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F42311529%2F137284379483%2F1%2Foriginal.jpg?h=120&w=240&rect=0%2C60%2C1920%2C960&s=33a9ca5deaed888248924c4049210276" width="400" height="300" alt="another sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="another sample image" class="i-amphtml-fill-content i-amphtml-replaced-content" src=""></amp-img>
+
+                    <amp-img src="https://ci5.googleusercontent.com/proxy/XK5X0fFko028jrHps1ChyE-06yq_Z1eTZSy35j93K5AFwz1qrLJrd2spmPd3sc03AMYoEENHeSpFloQNasgnU0-50INYHf7QQrXICpB3GPInwY0kiLM0ybJfJpW2g037XxzjirUsCkCQbRvPatPtZTWkJ-gM3gV2KD8nEEzTeSpTqdsBup62eebtZVhQ_ysvLNWER6LmNuTq71ISmg9bUiBpbLETkrRSKawwRJh754L5ZzFwwo2J5jDuGDdKLkaA5cvL7HpZ=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F42311529%2F137284379483%2F1%2Foriginal.jpg?h=120&w=240&rect=0%2C60%2C1920%2C960&s=33a9ca5deaed888248924c4049210276" width="400" height="300" alt="and another sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="and another sample image" class="i-amphtml-fill-content i-amphtml-replaced-content" src=""></amp-img>
+
+                    </div><div class="amp-carousel-button amp-carousel-button-prev amp-disabled" role="button" aria-label="Previous item in carousel" tabindex="0" aria-disabled="true"></div><div class="amp-carousel-button amp-carousel-button-next" role="button" aria-label="Next item in carousel" tabindex="0" aria-disabled="false">
+
+                    </div>
+
+                    </amp-carousel>
+                    <!-- - - - - - - - - - END CARROUSEL  - - - - - - - - -->
+
+                    </div>
                     <div role="tab" class="tabButton" option="b">TWO</div>
-                    <div role="tabpanel" class="tabContent">TWO</div>
+
+                    <div role="tabpanel" class="tabContent">
+
+                     <!-- - - - - - - - - - START CARROUSEL  - - - - - - - - -->
+                    <amp-carousel height="300" layout="fixed-height" type="carousel" class="i-amphtml-element i-amphtml-layout-fixed-height i-amphtml-layout-size-defined i-amphtml-carousel-has-controls i-amphtml-layout" style="width: 500px;height: 300px;">
+
+
+
+                    <div class="i-amphtml-scrollable-carousel-container">
+                    <amp-img src="https://ci6.googleusercontent.com/proxy/1TKHgTG9Nph6fz4s0N1CO7Sytrr4Xw0AmIeqTDrc93VTK5CFp46gUXbyh4bCdZDR0Xql3BRrumKasD6QvD5IXosl2Mg5d0L_UMz3qg9PfJM6692_UpAEhqtAVQMyNwfntrxQKi3nRKKwcokZKTiHTceNKIpNHBYBy-KOGLj38UjDzx2pV1GBNvwfrIilX6a0oBZyv_7UzCsA2PTi_zuIKCapu6fHDZE8DVcyF1VO2bplYtex0X4Ygdca2eDxseCcnAGmDqvv460=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F41295938%2F245714972468%2F1%2Foriginal.jpg?h=120&w=240&rect=197%2C0%2C2154%2C1077&s=5b93ebc29b7bf1c5a6d0042fc7dc9251" width="400" height="300" alt="a sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="a sample image" class="i-amphtml-fill-content i-amphtml-replaced-content" src=""></amp-img>
+
+                    <amp-img src="https://ci6.googleusercontent.com/proxy/1TKHgTG9Nph6fz4s0N1CO7Sytrr4Xw0AmIeqTDrc93VTK5CFp46gUXbyh4bCdZDR0Xql3BRrumKasD6QvD5IXosl2Mg5d0L_UMz3qg9PfJM6692_UpAEhqtAVQMyNwfntrxQKi3nRKKwcokZKTiHTceNKIpNHBYBy-KOGLj38UjDzx2pV1GBNvwfrIilX6a0oBZyv_7UzCsA2PTi_zuIKCapu6fHDZE8DVcyF1VO2bplYtex0X4Ygdca2eDxseCcnAGmDqvv460=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F41295938%2F245714972468%2F1%2Foriginal.jpg?h=120&w=240&rect=197%2C0%2C2154%2C1077&s=5b93ebc29b7bf1c5a6d0042fc7dc9251" width="400" height="300" alt="another sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="another sample image" class="i-amphtml-fill-content i-amphtml-replaced-content" src=""></amp-img>
+
+                    <amp-img src="https://ci6.googleusercontent.com/proxy/1TKHgTG9Nph6fz4s0N1CO7Sytrr4Xw0AmIeqTDrc93VTK5CFp46gUXbyh4bCdZDR0Xql3BRrumKasD6QvD5IXosl2Mg5d0L_UMz3qg9PfJM6692_UpAEhqtAVQMyNwfntrxQKi3nRKKwcokZKTiHTceNKIpNHBYBy-KOGLj38UjDzx2pV1GBNvwfrIilX6a0oBZyv_7UzCsA2PTi_zuIKCapu6fHDZE8DVcyF1VO2bplYtex0X4Ygdca2eDxseCcnAGmDqvv460=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F41295938%2F245714972468%2F1%2Foriginal.jpg?h=120&w=240&rect=197%2C0%2C2154%2C1077&s=5b93ebc29b7bf1c5a6d0042fc7dc9251" width="400" height="300" alt="and another sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="and another sample image" class="i-amphtml-fill-content i-amphtml-replaced-content" src=""></amp-img>
+
+                    </div><div class="amp-carousel-button amp-carousel-button-prev amp-disabled" role="button" aria-label="Previous item in carousel" tabindex="0" aria-disabled="true"></div><div class="amp-carousel-button amp-carousel-button-next" role="button" aria-label="Next item in carousel" tabindex="0" aria-disabled="false">
+
+                    </div>
+
+                    </amp-carousel>
+                    <!-- - - - - - - - - - END CARROUSEL  - - - - - - - - -->
+
+                    </div>
                     <div role="tab" class="tabButton" option="c">THREE</div>
-                    <div role="tabpanel" class="tabContent">THREE</div>
+                    <div role="tabpanel" class="tabContent">
+
+                                        <!-- - - - - - - - - - START CARROUSEL  - - - - - - - - -->
+                    <amp-carousel height="300" layout="fixed-height" type="carousel" class="i-amphtml-element i-amphtml-layout-fixed-height i-amphtml-layout-size-defined i-amphtml-carousel-has-controls i-amphtml-layout" style="width: 500px;height: 300px;">
+
+
+
+                    <div class="i-amphtml-scrollable-carousel-container">
+                    <amp-img src="https://ci6.googleusercontent.com/proxy/9icwjbta4_Y89HFo4vIgKC2dRM8YuIbDLISLu09uCjZEosoKH5YIJsl0eotbi3qtV9c2gNSbecUeYvHZtvv_bri25oXH4SGQtr8xD3ClijA0u7zdw1JFxNkjfAC7Dp6whKD6UY9zzSXKZqnQ2igJudC0IOP3fQMWoKOyisfTbmA27apStBfjO7cThI3aQxpMSvlHHMdS_yTjeuhCsmlcQSfC8TkRx8FdLgrOtXocVaibvuSLHVMGavkrAc26ldHPZf29jbo=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F40782015%2F233485646256%2F1%2Foriginal.jpg?h=120&w=240&rect=0%2C20%2C960%2C480&s=389529f695f357aee5a3625fcff3e394" width="400" height="300" alt="a sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="a sample image" class="i-amphtml-fill-content i-amphtml-replaced-content" src=""></amp-img>
+
+                    <amp-img src="https://ci6.googleusercontent.com/proxy/9icwjbta4_Y89HFo4vIgKC2dRM8YuIbDLISLu09uCjZEosoKH5YIJsl0eotbi3qtV9c2gNSbecUeYvHZtvv_bri25oXH4SGQtr8xD3ClijA0u7zdw1JFxNkjfAC7Dp6whKD6UY9zzSXKZqnQ2igJudC0IOP3fQMWoKOyisfTbmA27apStBfjO7cThI3aQxpMSvlHHMdS_yTjeuhCsmlcQSfC8TkRx8FdLgrOtXocVaibvuSLHVMGavkrAc26ldHPZf29jbo=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F40782015%2F233485646256%2F1%2Foriginal.jpg?h=120&w=240&rect=0%2C20%2C960%2C480&s=389529f695f357aee5a3625fcff3e394" width="400" height="300" alt="another sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="another sample image" class="i-amphtml-fill-content i-amphtml-replaced-content" src=""></amp-img>
+
+                    <amp-img src="https://ci6.googleusercontent.com/proxy/9icwjbta4_Y89HFo4vIgKC2dRM8YuIbDLISLu09uCjZEosoKH5YIJsl0eotbi3qtV9c2gNSbecUeYvHZtvv_bri25oXH4SGQtr8xD3ClijA0u7zdw1JFxNkjfAC7Dp6whKD6UY9zzSXKZqnQ2igJudC0IOP3fQMWoKOyisfTbmA27apStBfjO7cThI3aQxpMSvlHHMdS_yTjeuhCsmlcQSfC8TkRx8FdLgrOtXocVaibvuSLHVMGavkrAc26ldHPZf29jbo=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F40782015%2F233485646256%2F1%2Foriginal.jpg?h=120&w=240&rect=0%2C20%2C960%2C480&s=389529f695f357aee5a3625fcff3e394" width="400" height="300" alt="and another sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="and another sample image" class="i-amphtml-fill-content i-amphtml-replaced-content" src=""></amp-img>
+
+                    </div><div class="amp-carousel-button amp-carousel-button-prev amp-disabled" role="button" aria-label="Previous item in carousel" tabindex="0" aria-disabled="true"></div><div class="amp-carousel-button amp-carousel-button-next" role="button" aria-label="Next item in carousel" tabindex="0" aria-disabled="false">
+
+                    </div>
+
+                    </amp-carousel>
+                    <!-- - - - - - - - - - END CARROUSEL  - - - - - - - - -->
+
+                    </div>
                 </amp-selector>
+                <!-- - - - - - - - - - END TABS & CARROUSEL  - - - - - - - - -->
+
+<br>
+
+
+
 </td></tr>
 
 
@@ -687,3 +747,15 @@
 
 
 </body></html>
+
+ <!-- AMP -->
+            <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <!-- #### Setup -->
+    <!-- Import `amp-selector` component in the header which we'll use to implement the tab switching. -->
+    <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+    <!-- Import `amp-carousel` component in the header which we'll use as a sample tab content -->
+    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+    <!-- Import `amp-bind` component in the header which we'll use to switch tabs via buttons -->
+    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+    <!-- There's just a bit of css that's needed -->
+        <!-- END AMP -->
