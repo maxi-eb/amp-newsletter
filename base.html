@@ -1,20 +1,133 @@
-<html xmlns="http://www.w3.org/1999/xhtml"><head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta charset="UTF-8">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
 
-        <!-- Turn off iOS phone number autodetect -->
-        <meta name="format-detection" content="telephone=no">
-        <meta name="format-detection" content="address=no">
-        <link rel="stylesheet" type="text/css" href="styles.css">
+    <!-- Turn off iOS phone number autodetect -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <style amp-custom>
 
 
+.tab {
+  display: inline-block;
+  margin: 0 0 -1px;
+  padding: 15px 25px;
+  font-weight: 600;
+  text-align: center;
+  color: #bbb;
+  border: 0px solid transparent;
+}
 
-    </head>
+.tab[selected] {
 
-    <!-- Global container with background styles. Gmail converts BODY to DIV so we lose properties like BGCOLOR. -->
+  color: #f6682f;
+  background: #fff;
+  border: 0px solid transparent;
 
-    <body class="background-color" style="padding: 0;background-color: #EAEDED;padding: 0px;margin: 0px;" bgcolor="#EAEDED">
-        <div style="padding: 0;background-color: #EAEDED;font-family: &quot;Benton Sans&quot;, -apple-system, BlinkMacSystemFont, Roboto, &quot;Helvetica Neue&quot;, Helvetica, Tahoma, Arial, sans-serif;padding-top: 40px;padding-bottom: 40px;margin: 0px;" class="background-color background" celpadding="0" cellspacing="0" border="0" bgcolor="#EAEDED">
+}
+
+.tab:before {
+ color: #f6682f;
+  font-family: fontawesome;
+  font-weight: normal;
+  margin-right: 10px;
+}
+
+label[for*='1']:before { content: '\f1cb'; }
+label[for*='2']:before { content: '\f17d'; }
+label[for*='3']:before { content: '\f16b'; }
+label[for*='4']:before { content: '\f1a9'; }
+
+.tab:hover {
+  color: #f6682f;
+  cursor: pointer;
+}
+
+
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3,
+#tab4:checked ~ #content4 {
+  display: block;
+}
+
+@media screen and (max-width: 650px) {
+  .tab {
+    font-size: 0;
+  }
+  .tab:before {
+    margin: 0;
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .tab {
+    padding: 15px;
+  }
+}
+        .ampTabContainer {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    
+        .tabButton[selected] {
+            outline: none;
+            border: 0px solid transparent;
+    
+        }
+amp-selector [option][selected] {
+    cursor: auto;
+    outline: 0px solid transparent;
+}
+        .tabButton {
+            border: 0px solid transparent;
+            list-style: none;
+            flex-grow: 1;
+            text-align: center;
+            cursor: pointer;
+        }
+    
+        .tabContent {
+            border: 0px solid transparent;
+            display: none;
+            width: 100%;
+            order: 1; /* must be greater than the order of the tab buttons to flex to the next line */
+
+        }
+    
+        .tabButton[selected]+.tabContent {
+            display: block;
+            color: #f6682f;
+            border: 0px solid transparent;
+        }
+    
+        /* For example below (not required) */
+    
+        .itemCustom {
+            border: 0px solid transparent;
+
+            height: 280px;
+            width: 380px;
+            margin: 10px;
+            text-align: center;
+            padding-top: 140px;
+        }
+    
+        amp-selector {
+            padding: 1rem;
+            margin: 1rem;
+        }
+    </style>
+</head>
+
+<!-- Global container with background styles. Gmail converts BODY to DIV so we lose properties like BGCOLOR. -->
+
+<body class="background-color" style="padding: 0;background-color: #EAEDED;padding: 0px;margin: 0px;" bgcolor="#EAEDED">
+        <div style="padding: 0;background-color: #EAEDED;font-family: 'Benton Sans', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Helvetica, Tahoma, Arial, sans-serif;padding-top: 40px;padding-bottom: 40px;margin: 0px;" class="background-color background" celpadding="0" cellspacing="0" border="0" bgcolor="#EAEDED">
         <!--[if mso]>
             <table align="center" border="0" cellspacing="0" cellpadding="0" width="600" style="width:600px;" class="mso"  bgcolor="#EAEDED">
                 <tr>
@@ -22,8 +135,8 @@
         <![endif]-->
 
             <table style="padding: 0;border:0;border-collapse:collapse;border-spacing:0;margin-left: auto;margin-right: auto;max-width: 600px;width: 600px;background-color: #FFFFFF;" class="principal" celpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" width="600">
-
-                <tbody><tr>
+                <tbody>
+                <tr>
                     <!--[if mso]>
                         <td class="grid__col" height="4" style="line-height:1px; font-size:1px;" bgcolor="#F6682F" width="600">&nbsp;</td>
                     <![endif]-->
@@ -36,399 +149,317 @@
                     <td style="padding: 0;">
                         <!-- Header -->
                         <table style="padding: 0; border:0;border-collapse:collapse;border-spacing:0;margin-left:32px;margin-right:32px;width:536px;" class="content" celpadding="0" cellspacing="0" border="0" width="536">
-                            <tbody>
-                                <tr>
-                                    <td style="padding: 0; text-align: left;" align="left">
-                                        <h2 style="padding: 0;color: #45494E;margin: 24px 0px 0px 0px;" class="heading">
-                                            <a style="text-decoration:none;" href=".com/?utm_source=eb_email&amp;utm_medium=email&amp;utm_campaign=utm_campaign&amp;utm_term=eb_logo">
-                                                <img style="border:0;height:20px;width:126px;" class="eb_logo" src="https://cdn.evbstatic.com/s3-s3/marketing/emails/images/logos/eb-wordmarkx2.png" alt="Eventbrite" width="126" height="20">
-                                            </a>
-                                        </h2>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            <tbody><tr>
+                                <td style="padding: 0; text-align: left;" align="left">
+                                    <h2 style="padding: 0;color: #45494E;margin: 24px 0px 0px 0px;" class="heading">
+                                        <a style="text-decoration:none;" href=".com/?utm_source=eb_email&amp;utm_medium=email&amp;utm_campaign=utm_campaign&amp;utm_term=eb_logo">
+                                            <img style="border:0;height:20px;width:126px;" class="eb_logo" src="https://cdn.evbstatic.com/s3-s3/marketing/emails/images/logos/eb-wordmarkx2.png" alt="Eventbrite" width="126" height="20">
+                                        </a>
+                                    </h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="grid__col" style="padding: 0;text-align: left;" align="left">
+                                    <h2 class="heading heading_epic" style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;padding: 0;margin: 24px 0px 0px 0px;font-size: 35px;font-weight: 200;line-height: 42px;margin-top: 20px;">
+                                        Your Weekly Event Guide
+                                    </h2>
+                                </td>
+                            </tr>
+                        </tbody></table>
                     </td>
                 </tr>
                 <!-- Body -->
-                
-                <style amp-custom>
-                    .ampTabContainer {
-                        padding-top: 0px;
-                    }
-
-                    .tabButton[selected] {
-                        outline: none !important;
-                        border-bottom: 2px solid #f6682f;
-                        color: #f6682f !important;
-                    }
-
-                    .tabButton:focus {
-                        outline: none !important;
-                    }
-
-                    .tabButton {
-                        font-weight:500;
-                        list-style: none;
-                        flex-grow: 1;
-                        text-align: center;
-                        cursor: pointer;
-                        border-color: transparent;
-                        background: #FFF;
-                        color: #666A73;
-                        fill: #FFFFFF;
-                        padding-top: 10px;
-                        padding-bottom: 10px;
-                        box-sizing: border-box;
-                        text-align: center;
-                        text-decoration: none;
-                        line-height: 20px;
-                        letter-spacing: 0.2px;
-                        font-size: 16px;
-                        margin: 10px 0px;
-                        display: inline-block;
-                    }
-
-                    .tabButton:hover {
-                        color: #000;
-                    }
-
-                    .tabContent {
-                        display: none;
-                        width: 100%;
-                        order: 1; /* must be greater than the order of the tab buttons to flex to the next line */
-                        padding: 10px 0px;
-                    }
-
-                    .ampTabContainer[selected="a"] .tabContent[content="a"] {
-                        display: block;
-                    }
-
-                    .ampTabContainer[selected="b"] .tabContent[content="b"] {
-                        display: block;
-                    }
-
-                    .ampTabContainer[selected="c"] .tabContent[content="c"] {
-                        display: block;
-                    }
-
-                    /* For example below (not required) */
-                    .itemCustom {
-                        border: 1px solid #000;
-                        height: 280px;
-                        width: 380px;
-                        margin: 10px;
-                        text-align: center;
-                        padding-top: 140px;
-                    }
-                    amp-selector {
-                      padding: 1rem;
-                      margin: 1rem;
-                    }
-                    .tabs-wrapper {
-                        display: flex;
-                        flex-wrap: wrap;
-                        width: 100%;
-                    }
-
-                    .tabContent {
-                        border: 0px solid transparent;
-                        display: none;
-                        width: 100%;
-                        order: 1; /* must be greater than the order of the tab buttons to flex to the next line */
-
-                    }
-
-                    /* For example below (not required) */
-                    .itemCustom {
-                        border: 0px solid transparent;
-
-                        height: 280px;
-                        width: 380px;
-                        margin: 10px;
-                        text-align: center;
-                        padding-top: 140px;
-                    }
-
-                    @media all and (max-width: 480px) {
-                        .tabs {
-                            display: block;
-                            width: 100%;
-                            overflow-x: scroll;
-                            overflow-y: hidden;
-                            white-space: nowrap;
-                        }
-
-                        .tabs-wrapper {
-                            width: 0px;
-                            display: block;
-                        }
-
-                        .tabButton {
-                            display: inline-block;
-                            padding: 20px;
-                            margin: 0px;
-                        }
-                        .ampTabContainer {
-                            width: 100%;
-                        }
-                        amp-selector {
-                          padding: 0;
-                          margin: 0;
-                        }
-                    }
-                </style>
-
-                <tr>
-                    <td class="row_section" style="
-                        padding: 0;
-                     
-                        margin-left: auto;
-                        margin-right: auto;
-                    ">
-                            <table style="
-                        padding: 0;
-                     
-                        border:0;
-                        border-collapse:collapse;
-                        border-spacing:0;
-                        margin-left:32px;
-                        margin-right:32px;
-                        width:536px;
-                     " class="content" cellspacing="0" cellpadding="0" width="536" bgcolor="">
-                            
-                            <tbody><tr class="small_full_width" style="">
-                            <td class="grid__col" style="
-                            padding: 0;
-                         
-                            text-align: left;
-                        " align="left">
-                                
-                                
-                        <h2 class="heading heading_epic" style="
-                            font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
-                         
-                            padding: 0;
-                            margin: 24px 0px 0px 0px;
-                         
-                            font-size: 35px;
-                            font-weight: 200;
-                            line-height: 42px;
-                            margin-top: 20px;
-                        ">
-                            
-                                        Your Weekly Event Guide
-                                
-                        </h2>
-
-                            
-                            </td>
-                        </tr>
-
-                            
-                        <tr class="small_full_width" style="">
-                            <td class="grid__col" style="
-                            padding: 0;
-                         
-                            text-align: left;
-                        " align="left">
-                                
-                                
-                        <p style="
-                            font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
-                            padding:0;
-                            color:#666a73;
-                            font-weight:300;
-                            margin:8px 0;
-                            font-size:17px;
-                            line-height:24px;
-                        " class="text_body text_body_large">
-                            
-                                    Get up, get out! Check out these recommended events for you.
-                                
-                        </p>
-
-                            
-                            </td>
-                        </tr>
-
-                        </tbody>
-                        </table>
-
-                        </td>
-                        </tr>
-
-
-                        <tr><td>
-
+                <tr><td>
 <!-- - - - - - - - - -TABS & CARROUSEL  - - - - - - - - -->
+<amp-selector on="select:AMP.setState({selectedTab: event.targetOption})" [selected]="selectedTab" role="tablist" layout="container" class="ampTabContainer">
 
-                    <amp-selector on="select:AMP.setState({selectedTab: event.targetOption})" [selected]="selectedTab" role="tablist" layout="container" class="ampTabContainer" selected="a">
-                    
-                        <div class="tabs">
-                            <div class="tabs-wrapper">
-                                <div role="tab" class="tabButton" selected option="a">Events for you</div>
-                                <div role="tab" class="tabButton" option="b">Weekend guide</div>
-                                <div role="tab" class="tabButton" option="c">Your saved events</div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div role="tabpanel" class="tabContent content-a" content="a">
-                                <!-- Content a -->
-
-
-                        <!-- - - - - - - - - - CONTENT - - - - - - - - -->
+                    <div role="tab" class="tabButton tab" selected option="a">Events for you</div>
+                    <div role="tabpanel" class="tabContent">
+                    <!-- - - - - - - - - - CONTENT - - - - - - - - -->
                     <!-- - - - - - - - - - START CARROUSEL  - - - - - - - - -->
-                                <amp-carousel height="300" layout="fixed-height" type="carousel" class="i-amphtml-element i-amphtml-layout-fixed-height i-amphtml-layout-size-defined i-amphtml-carousel-has-controls i-amphtml-layout" style="width: 500px;height: 300px;">
+                    <amp-carousel height="300" layout="fixed-height" type="carousel" class="i-amphtml-element i-amphtml-layout-fixed-height i-amphtml-layout-size-defined i-amphtml-carousel-has-controls i-amphtml-layout" style="width: 500px;height: 300px;">
 
 
 
-                                <div class="i-amphtml-scrollable-carousel-container">
-                                <amp-img src="https://ci6.googleusercontent.com/proxy/9icwjbta4_Y89HFo4vIgKC2dRM8YuIbDLISLu09uCjZEosoKH5YIJsl0eotbi3qtV9c2gNSbecUeYvHZtvv_bri25oXH4SGQtr8xD3ClijA0u7zdw1JFxNkjfAC7Dp6whKD6UY9zzSXKZqnQ2igJudC0IOP3fQMWoKOyisfTbmA27apStBfjO7cThI3aQxpMSvlHHMdS_yTjeuhCsmlcQSfC8TkRx8FdLgrOtXocVaibvuSLHVMGavkrAc26ldHPZf29jbo=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F40782015%2F233485646256%2F1%2Foriginal.jpg?h=120&w=240&rect=0%2C20%2C960%2C480&s=389529f695f357aee5a3625fcff3e394" width="400" height="300" alt="a sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="a sample image" class="   i-amphtml-fill-content i-amphtml-replaced-content" src="">
+                    <div class="i-amphtml-scrollable-carousel-container">
+                    <amp-img src="https://ci5.googleusercontent.com/proxy/XK5X0fFko028jrHps1ChyE-06yq_Z1eTZSy35j93K5AFwz1qrLJrd2spmPd3sc03AMYoEENHeSpFloQNasgnU0-50INYHf7QQrXICpB3GPInwY0kiLM0ybJfJpW2g037XxzjirUsCkCQbRvPatPtZTWkJ-gM3gV2KD8nEEzTeSpTqdsBup62eebtZVhQ_ysvLNWER6LmNuTq71ISmg9bUiBpbLETkrRSKawwRJh754L5ZzFwwo2J5jDuGDdKLkaA5cvL7HpZ=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F42311529%2F137284379483%2F1%2Foriginal.jpg?h=120&w=240&rect=0%2C60%2C1920%2C960&s=33a9ca5deaed888248924c4049210276" width="400" height="300" alt="a sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="a sample image" class="   i-amphtml-fill-content i-amphtml-replaced-content" src="">
 
-                                    <!-- - - - - - - - - - HEAD SLIDE - - - - - - - - -->
+                        <!-- - - - - - - - - - HEAD SLIDE - - - - - - - - -->
 
-                             <a  href="https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref=eattnewsrecs&amp;utm_source=strongmail&amp;utm_medium=discovery&amp;utm_campaign=newsletter&amp;utm_content=EBrecommend&amp;utm_term=eventcard&amp;afu=159870568778&amp;rank=0&amp;aff=eattnewsrecs" style="text-decoration:none" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref%3Deattnewsrecs%26utm_source%3Dstrongmail%26utm_medium%3Ddiscovery%26utm_campaign%3Dnewsletter%26utm_content%3DEBrecommend%26utm_term%3Deventcard%26afu%3D159870568778%26rank%3D0%26aff%3Deattnewsrecs&amp;source=gmail&amp;ust=1521815957205000&amp;usg=AFQjCNEJ0jfbkqhiJsCPIPLBYXQQFMUQCQ">
-                            Sunday(s) at I-House with According to...
-                             </a>
+                 <a  href="https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref=eattnewsrecs&amp;utm_source=strongmail&amp;utm_medium=discovery&amp;utm_campaign=newsletter&amp;utm_content=EBrecommend&amp;utm_term=eventcard&amp;afu=159870568778&amp;rank=0&amp;aff=eattnewsrecs" style="text-decoration:none" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref%3Deattnewsrecs%26utm_source%3Dstrongmail%26utm_medium%3Ddiscovery%26utm_campaign%3Dnewsletter%26utm_content%3DEBrecommend%26utm_term%3Deventcard%26afu%3D159870568778%26rank%3D0%26aff%3Deattnewsrecs&amp;source=gmail&amp;ust=1521815957205000&amp;usg=AFQjCNEJ0jfbkqhiJsCPIPLBYXQQFMUQCQ">
+                Sunday(s) at I-House with According to...
+                 </a>
 
-                             <div  style="font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:12px;font-weight:300;line-height:18px">
-                             Thu, Mar 29
-                             </div>
+                 <div  style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:12px;font-weight:300;line-height:18px">
+                 Thu, Mar 29
+                 </div>
 
-                             <div  style="font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:14px;font-weight:300;line-height:10px">
-                            International House Davis, Davis
-                             </div>
-
-
-                        <!-- - - - - - - - - - END HEAD SLIDE - - - - - - - - -->
+                 <div  style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:14px;font-weight:300;line-height:10px">
+                International House Davis, Davis
+                 </div>
 
 
-                                </amp-img>
-
-                                <amp-img src="https://ci5.googleusercontent.com/proxy/XK5X0fFko028jrHps1ChyE-06yq_Z1eTZSy35j93K5AFwz1qrLJrd2spmPd3sc03AMYoEENHeSpFloQNasgnU0-50INYHf7QQrXICpB3GPInwY0kiLM0ybJfJpW2g037XxzjirUsCkCQbRvPatPtZTWkJ-gM3gV2KD8nEEzTeSpTqdsBup62eebtZVhQ_ysvLNWER6LmNuTq71ISmg9bUiBpbLETkrRSKawwRJh754L5ZzFwwo2J5jDuGDdKLkaA5cvL7HpZ=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F42311529%2F137284379483%2F1%2Foriginal.jpg?h=120&w=240&rect=0%2C60%2C1920%2C960&s=33a9ca5deaed888248924c4049210276" width="400" height="300" alt="another sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="another sample image" class="i-amphtml-fill-content i-amphtml-replaced-content" src="">
+            <!-- - - - - - - - - - END HEAD SLIDE - - - - - - - - -->
 
 
-                                    <!-- - - - - - - - - - HEAD SLIDE - - - - - - - - -->
+                    </amp-img>
 
-                             <a  href="https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref=eattnewsrecs&amp;utm_source=strongmail&amp;utm_medium=discovery&amp;utm_campaign=newsletter&amp;utm_content=EBrecommend&amp;utm_term=eventcard&amp;afu=159870568778&amp;rank=0&amp;aff=eattnewsrecs" style="text-decoration:none" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref%3Deattnewsrecs%26utm_source%3Dstrongmail%26utm_medium%3Ddiscovery%26utm_campaign%3Dnewsletter%26utm_content%3DEBrecommend%26utm_term%3Deventcard%26afu%3D159870568778%26rank%3D0%26aff%3Deattnewsrecs&amp;source=gmail&amp;ust=1521815957205000&amp;usg=AFQjCNEJ0jfbkqhiJsCPIPLBYXQQFMUQCQ">
-                            Sunday(s) at I-House with According to...
-                             </a>
-
-                             <div  style="font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:12px;font-weight:300;line-height:18px">
-                             Thu, Mar 29
-                             </div>
-
-                             <div  style="font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:14px;font-weight:300;line-height:10px">
-                            International House Davis, Davis
-                             </div>
+                    <amp-img src="https://ci5.googleusercontent.com/proxy/XK5X0fFko028jrHps1ChyE-06yq_Z1eTZSy35j93K5AFwz1qrLJrd2spmPd3sc03AMYoEENHeSpFloQNasgnU0-50INYHf7QQrXICpB3GPInwY0kiLM0ybJfJpW2g037XxzjirUsCkCQbRvPatPtZTWkJ-gM3gV2KD8nEEzTeSpTqdsBup62eebtZVhQ_ysvLNWER6LmNuTq71ISmg9bUiBpbLETkrRSKawwRJh754L5ZzFwwo2J5jDuGDdKLkaA5cvL7HpZ=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F42311529%2F137284379483%2F1%2Foriginal.jpg?h=120&w=240&rect=0%2C60%2C1920%2C960&s=33a9ca5deaed888248924c4049210276" width="400" height="300" alt="another sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="another sample image" class="i-amphtml-fill-content i-amphtml-replaced-content" src="">
 
 
-                        <!-- - - - - - - - - - END HEAD SLIDE - - - - - - - - -->
+                        <!-- - - - - - - - - - HEAD SLIDE - - - - - - - - -->
 
-                                </amp-img>
+                 <a  href="https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref=eattnewsrecs&amp;utm_source=strongmail&amp;utm_medium=discovery&amp;utm_campaign=newsletter&amp;utm_content=EBrecommend&amp;utm_term=eventcard&amp;afu=159870568778&amp;rank=0&amp;aff=eattnewsrecs" style="text-decoration:none" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref%3Deattnewsrecs%26utm_source%3Dstrongmail%26utm_medium%3Ddiscovery%26utm_campaign%3Dnewsletter%26utm_content%3DEBrecommend%26utm_term%3Deventcard%26afu%3D159870568778%26rank%3D0%26aff%3Deattnewsrecs&amp;source=gmail&amp;ust=1521815957205000&amp;usg=AFQjCNEJ0jfbkqhiJsCPIPLBYXQQFMUQCQ">
+                Sunday(s) at I-House with According to...
+                 </a>
 
-                                <amp-img src="https://ci5.googleusercontent.com/proxy/XK5X0fFko028jrHps1ChyE-06yq_Z1eTZSy35j93K5AFwz1qrLJrd2spmPd3sc03AMYoEENHeSpFloQNasgnU0-50INYHf7QQrXICpB3GPInwY0kiLM0ybJfJpW2g037XxzjirUsCkCQbRvPatPtZTWkJ-gM3gV2KD8nEEzTeSpTqdsBup62eebtZVhQ_ysvLNWER6LmNuTq71ISmg9bUiBpbLETkrRSKawwRJh754L5ZzFwwo2J5jDuGDdKLkaA5cvL7HpZ=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F42311529%2F137284379483%2F1%2Foriginal.jpg?h=120&w=240&rect=0%2C60%2C1920%2C960&s=33a9ca5deaed888248924c4049210276" width="400" height="300" alt="and another sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="and another sample image" class="i-amphtml-fill-content i-amphtml-replaced-content" src="">
+                 <div  style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:12px;font-weight:300;line-height:18px">
+                 Thu, Mar 29
+                 </div>
 
-                                        <!-- - - - - - - - - - HEAD SLIDE - - - - - - - - -->
-
-                             <a  href="https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref=eattnewsrecs&amp;utm_source=strongmail&amp;utm_medium=discovery&amp;utm_campaign=newsletter&amp;utm_content=EBrecommend&amp;utm_term=eventcard&amp;afu=159870568778&amp;rank=0&amp;aff=eattnewsrecs" style="text-decoration:none" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref%3Deattnewsrecs%26utm_source%3Dstrongmail%26utm_medium%3Ddiscovery%26utm_campaign%3Dnewsletter%26utm_content%3DEBrecommend%26utm_term%3Deventcard%26afu%3D159870568778%26rank%3D0%26aff%3Deattnewsrecs&amp;source=gmail&amp;ust=1521815957205000&amp;usg=AFQjCNEJ0jfbkqhiJsCPIPLBYXQQFMUQCQ">
-                            Sunday(s) at I-House with According to...
-                             </a>
-
-                             <div  style="font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:12px;font-weight:300;line-height:18px">
-                             Thu, Mar 29
-                             </div>
-
-                             <div  style="font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:14px;font-weight:300;line-height:10px">
-                            International House Davis, Davis
-                             </div>
+                 <div  style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:14px;font-weight:300;line-height:10px">
+                International House Davis, Davis
+                 </div>
 
 
-                        <!-- - - - - - - - - - END HEAD SLIDE - - - - - - - - -->
+            <!-- - - - - - - - - - END HEAD SLIDE - - - - - - - - -->
 
-                                </amp-img>
+                    </amp-img>
 
-                                </div><div class="amp-carousel-button amp-carousel-button-prev amp-disabled" role="button" aria-label="Previous item in carousel" tabindex="0" aria-disabled="true"></div><div class="amp-carousel-button amp-carousel-button-next" role="button" aria-label="Next item in carousel" tabindex="0" aria-disabled="false">
+                    <amp-img src="https://ci5.googleusercontent.com/proxy/XK5X0fFko028jrHps1ChyE-06yq_Z1eTZSy35j93K5AFwz1qrLJrd2spmPd3sc03AMYoEENHeSpFloQNasgnU0-50INYHf7QQrXICpB3GPInwY0kiLM0ybJfJpW2g037XxzjirUsCkCQbRvPatPtZTWkJ-gM3gV2KD8nEEzTeSpTqdsBup62eebtZVhQ_ysvLNWER6LmNuTq71ISmg9bUiBpbLETkrRSKawwRJh754L5ZzFwwo2J5jDuGDdKLkaA5cvL7HpZ=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F42311529%2F137284379483%2F1%2Foriginal.jpg?h=120&w=240&rect=0%2C60%2C1920%2C960&s=33a9ca5deaed888248924c4049210276" width="400" height="300" alt="and another sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="and another sample image" class="i-amphtml-fill-content i-amphtml-replaced-content" src="">
 
-                                </div>
+                            <!-- - - - - - - - - - HEAD SLIDE - - - - - - - - -->
 
-                                </amp-carousel>
+                 <a  href="https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref=eattnewsrecs&amp;utm_source=strongmail&amp;utm_medium=discovery&amp;utm_campaign=newsletter&amp;utm_content=EBrecommend&amp;utm_term=eventcard&amp;afu=159870568778&amp;rank=0&amp;aff=eattnewsrecs" style="text-decoration:none" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref%3Deattnewsrecs%26utm_source%3Dstrongmail%26utm_medium%3Ddiscovery%26utm_campaign%3Dnewsletter%26utm_content%3DEBrecommend%26utm_term%3Deventcard%26afu%3D159870568778%26rank%3D0%26aff%3Deattnewsrecs&amp;source=gmail&amp;ust=1521815957205000&amp;usg=AFQjCNEJ0jfbkqhiJsCPIPLBYXQQFMUQCQ">
+                Sunday(s) at I-House with According to...
+                 </a>
+
+                 <div  style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:12px;font-weight:300;line-height:18px">
+                 Thu, Mar 29
+                 </div>
+
+                 <div  style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:14px;font-weight:300;line-height:10px">
+                International House Davis, Davis
+                 </div>
+
+
+            <!-- - - - - - - - - - END HEAD SLIDE - - - - - - - - -->
+
+                    </amp-img>
+
+                    </div><div class="amp-carousel-button amp-carousel-button-prev amp-disabled" role="button" aria-label="Previous item in carousel" tabindex="0" aria-disabled="true"></div><div class="amp-carousel-button amp-carousel-button-next" role="button" aria-label="Next item in carousel" tabindex="0" aria-disabled="false">
+
+                    </div>
+
+                    </amp-carousel>
                     <!-- - - - - - - - - - END CARROUSEL  - - - - - - - - -->
 
                     <!-- - - - - - - - - - BUTTOM - - - - - - - - -->
 
-                                <div style="font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;padding:0;text-align:center" align="center">
-                                 <a href="https://admin.evbqa.com/admin/email-preview/.com/u/179892558?ref=eattnewssaved&utm_source=strongmail&utm_medium=discovery&utm_campaign=newsletter&utm_content=EBrecommend" style="background-color:#f6682f;display:inline-block;line-height:20px;font-weight:500;font-size:14px;text-align:center;text-decoration:none;padding:10px 32px 10px 32px;color:#fff;border-radius:40px;margin-bottom:32px;margin-top:30px" class="m_-8784778928101538030m_7967521110313607077btn m_-8784778928101538030m_7967521110313607077call_to_action" align="center" bgcolor="#F6682F" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.eventbrite.com/d/?ref%3Deattnewsrecs%26utm_source%3Dstrongmail%26utm_medium%3Ddiscovery%26utm_campaign%3Dnewsletter%26utm_content%3DEBrecommend&amp;source=gmail&amp;ust=1521815957206000&amp;usg=AFQjCNHMeAacYU2r9tzTGXGh6kYqiNLv1g">
-                                 Show me more
-                                 </a>
-                                </div>
+        <div style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;padding:0;text-align:center" align="center">
+         <a href="https://admin.evbqa.com/admin/email-preview/.com/u/179892558?ref=eattnewssaved&utm_source=strongmail&utm_medium=discovery&utm_campaign=newsletter&utm_content=EBrecommend" style="background-color:#f6682f;display:inline-block;line-height:20px;font-weight:500;font-size:14px;text-align:center;text-decoration:none;padding:10px 32px 10px 32px;color:#fff;border-radius:40px;margin-bottom:32px;margin-top:30px" class="m_-8784778928101538030m_7967521110313607077btn m_-8784778928101538030m_7967521110313607077call_to_action" align="center" bgcolor="#F6682F" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.eventbrite.com/d/?ref%3Deattnewsrecs%26utm_source%3Dstrongmail%26utm_medium%3Ddiscovery%26utm_campaign%3Dnewsletter%26utm_content%3DEBrecommend&amp;source=gmail&amp;ust=1521815957206000&amp;usg=AFQjCNHMeAacYU2r9tzTGXGh6kYqiNLv1g">
+         View all recommended
+         </a>
+        </div>
          <!-- - - - - - - - - - END BuTTOM - - - - - - - - -->
         <!-- - - - - - - - - - END CONTENT - - - - - - - - -->
 
+                    </div>
+                    <div role="tab" class="tabButton tab" option="b">Weekend guide</div>
 
-                            </div>
-                            
-                            <div role="tabpanel" class="tabContent content-b" content="b">
-                                <!-- Content b -->
+                    <div role="tabpanel" class="tabContent">
 
-                            </div>
-                            <div role="tabpanel" class="tabContent content-c" content="c">
-                                <!-- Content c -->
+                    <!-- - - - - - - - - - CONTENT - - - - - - - - -->
+                    <!-- - - - - - - - - - START CARROUSEL  - - - - - - - - -->
+                    <amp-carousel height="300" layout="fixed-height" type="carousel" class="i-amphtml-element i-amphtml-layout-fixed-height i-amphtml-layout-size-defined i-amphtml-carousel-has-controls i-amphtml-layout" style="width: 500px;height: 300px;">
 
-                            </div>
-                        </div>
-                        
+
+
+                    <div class="i-amphtml-scrollable-carousel-container">
+                    <amp-img src="https://ci6.googleusercontent.com/proxy/9icwjbta4_Y89HFo4vIgKC2dRM8YuIbDLISLu09uCjZEosoKH5YIJsl0eotbi3qtV9c2gNSbecUeYvHZtvv_bri25oXH4SGQtr8xD3ClijA0u7zdw1JFxNkjfAC7Dp6whKD6UY9zzSXKZqnQ2igJudC0IOP3fQMWoKOyisfTbmA27apStBfjO7cThI3aQxpMSvlHHMdS_yTjeuhCsmlcQSfC8TkRx8FdLgrOtXocVaibvuSLHVMGavkrAc26ldHPZf29jbo=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F40782015%2F233485646256%2F1%2Foriginal.jpg?h=120&w=240&rect=0%2C20%2C960%2C480&s=389529f695f357aee5a3625fcff3e394" width="400" height="300" alt="a sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="a sample image" class="   i-amphtml-fill-content i-amphtml-replaced-content" src="">
+
+                        <!-- - - - - - - - - - HEAD SLIDE - - - - - - - - -->
+
+                 <a  href="https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref=eattnewsrecs&amp;utm_source=strongmail&amp;utm_medium=discovery&amp;utm_campaign=newsletter&amp;utm_content=EBrecommend&amp;utm_term=eventcard&amp;afu=159870568778&amp;rank=0&amp;aff=eattnewsrecs" style="text-decoration:none" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref%3Deattnewsrecs%26utm_source%3Dstrongmail%26utm_medium%3Ddiscovery%26utm_campaign%3Dnewsletter%26utm_content%3DEBrecommend%26utm_term%3Deventcard%26afu%3D159870568778%26rank%3D0%26aff%3Deattnewsrecs&amp;source=gmail&amp;ust=1521815957205000&amp;usg=AFQjCNEJ0jfbkqhiJsCPIPLBYXQQFMUQCQ">
+                Sunday(s) at I-House with According to...
+                 </a>
+
+                 <div  style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:12px;font-weight:300;line-height:18px">
+                 Thu, Mar 29
+                 </div>
+
+                 <div  style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:14px;font-weight:300;line-height:10px">
+                International House Davis, Davis
+                 </div>
+
+
+            <!-- - - - - - - - - - END HEAD SLIDE - - - - - - - - -->
+
+
+                    </amp-img>
+
+                    <amp-img src="https://ci5.googleusercontent.com/proxy/XK5X0fFko028jrHps1ChyE-06yq_Z1eTZSy35j93K5AFwz1qrLJrd2spmPd3sc03AMYoEENHeSpFloQNasgnU0-50INYHf7QQrXICpB3GPInwY0kiLM0ybJfJpW2g037XxzjirUsCkCQbRvPatPtZTWkJ-gM3gV2KD8nEEzTeSpTqdsBup62eebtZVhQ_ysvLNWER6LmNuTq71ISmg9bUiBpbLETkrRSKawwRJh754L5ZzFwwo2J5jDuGDdKLkaA5cvL7HpZ=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F42311529%2F137284379483%2F1%2Foriginal.jpg?h=120&w=240&rect=0%2C60%2C1920%2C960&s=33a9ca5deaed888248924c4049210276" width="400" height="300" alt="another sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="another sample image" class="i-amphtml-fill-content i-amphtml-replaced-content" src="">
+
+
+                        <!-- - - - - - - - - - HEAD SLIDE - - - - - - - - -->
+
+                 <a  href="https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref=eattnewsrecs&amp;utm_source=strongmail&amp;utm_medium=discovery&amp;utm_campaign=newsletter&amp;utm_content=EBrecommend&amp;utm_term=eventcard&amp;afu=159870568778&amp;rank=0&amp;aff=eattnewsrecs" style="text-decoration:none" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref%3Deattnewsrecs%26utm_source%3Dstrongmail%26utm_medium%3Ddiscovery%26utm_campaign%3Dnewsletter%26utm_content%3DEBrecommend%26utm_term%3Deventcard%26afu%3D159870568778%26rank%3D0%26aff%3Deattnewsrecs&amp;source=gmail&amp;ust=1521815957205000&amp;usg=AFQjCNEJ0jfbkqhiJsCPIPLBYXQQFMUQCQ">
+                Sunday(s) at I-House with According to...
+                 </a>
+
+                 <div  style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:12px;font-weight:300;line-height:18px">
+                 Thu, Mar 29
+                 </div>
+
+                 <div  style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:14px;font-weight:300;line-height:10px">
+                International House Davis, Davis
+                 </div>
+
+
+            <!-- - - - - - - - - - END HEAD SLIDE - - - - - - - - -->
+
+                    </amp-img>
+
+                    <amp-img src="https://ci5.googleusercontent.com/proxy/XK5X0fFko028jrHps1ChyE-06yq_Z1eTZSy35j93K5AFwz1qrLJrd2spmPd3sc03AMYoEENHeSpFloQNasgnU0-50INYHf7QQrXICpB3GPInwY0kiLM0ybJfJpW2g037XxzjirUsCkCQbRvPatPtZTWkJ-gM3gV2KD8nEEzTeSpTqdsBup62eebtZVhQ_ysvLNWER6LmNuTq71ISmg9bUiBpbLETkrRSKawwRJh754L5ZzFwwo2J5jDuGDdKLkaA5cvL7HpZ=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F42311529%2F137284379483%2F1%2Foriginal.jpg?h=120&w=240&rect=0%2C60%2C1920%2C960&s=33a9ca5deaed888248924c4049210276" width="400" height="300" alt="and another sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="and another sample image" class="i-amphtml-fill-content i-amphtml-replaced-content" src="">
+
+                            <!-- - - - - - - - - - HEAD SLIDE - - - - - - - - -->
+
+                 <a  href="https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref=eattnewsrecs&amp;utm_source=strongmail&amp;utm_medium=discovery&amp;utm_campaign=newsletter&amp;utm_content=EBrecommend&amp;utm_term=eventcard&amp;afu=159870568778&amp;rank=0&amp;aff=eattnewsrecs" style="text-decoration:none" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref%3Deattnewsrecs%26utm_source%3Dstrongmail%26utm_medium%3Ddiscovery%26utm_campaign%3Dnewsletter%26utm_content%3DEBrecommend%26utm_term%3Deventcard%26afu%3D159870568778%26rank%3D0%26aff%3Deattnewsrecs&amp;source=gmail&amp;ust=1521815957205000&amp;usg=AFQjCNEJ0jfbkqhiJsCPIPLBYXQQFMUQCQ">
+                Sunday(s) at I-House with According to...
+                 </a>
+
+                 <div  style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:12px;font-weight:300;line-height:18px">
+                 Thu, Mar 29
+                 </div>
+
+                 <div  style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:14px;font-weight:300;line-height:10px">
+                International House Davis, Davis
+                 </div>
+
+
+            <!-- - - - - - - - - - END HEAD SLIDE - - - - - - - - -->
+
+                    </amp-img>
+
+                    </div><div class="amp-carousel-button amp-carousel-button-prev amp-disabled" role="button" aria-label="Previous item in carousel" tabindex="0" aria-disabled="true"></div><div class="amp-carousel-button amp-carousel-button-next" role="button" aria-label="Next item in carousel" tabindex="0" aria-disabled="false">
+
+                    </div>
+
+                    </amp-carousel>
+                    <!-- - - - - - - - - - END CARROUSEL  - - - - - - - - -->
+
+                    <!-- - - - - - - - - - BUTTOM - - - - - - - - -->
+
+        <div style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;padding:0;text-align:center" align="center">
+         <a href="https://admin.evbqa.com/admin/email-preview/.com/u/179892558?ref=eattnewssaved&utm_source=strongmail&utm_medium=discovery&utm_campaign=newsletter&utm_content=EBrecommend" style="background-color:#f6682f;display:inline-block;line-height:20px;font-weight:500;font-size:14px;text-align:center;text-decoration:none;padding:10px 32px 10px 32px;color:#fff;border-radius:40px;margin-bottom:32px;margin-top:30px" class="m_-8784778928101538030m_7967521110313607077btn m_-8784778928101538030m_7967521110313607077call_to_action" align="center" bgcolor="#F6682F" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.eventbrite.com/d/?ref%3Deattnewsrecs%26utm_source%3Dstrongmail%26utm_medium%3Ddiscovery%26utm_campaign%3Dnewsletter%26utm_content%3DEBrecommend&amp;source=gmail&amp;ust=1521815957206000&amp;usg=AFQjCNHMeAacYU2r9tzTGXGh6kYqiNLv1g">
+         Show me more
+         </a>
+        </div>
+         <!-- - - - - - - - - - END BuTTOM - - - - - - - - -->
+        <!-- - - - - - - - - - END CONTENT - - - - - - - - -->
+
+                    </div>
+                    <div role="tab" class="tabButton tab" option="c">Your saved events</div>
+                    <div role="tabpanel" class="tabContent">
+
+                  <!-- - - - - - - - - - CONTENT - - - - - - - - -->
+                    <!-- - - - - - - - - - START CARROUSEL  - - - - - - - - -->
+                    <amp-carousel height="300" layout="fixed-height" type="carousel" class="i-amphtml-element i-amphtml-layout-fixed-height i-amphtml-layout-size-defined i-amphtml-carousel-has-controls i-amphtml-layout" style="width: 500px;height: 300px;">
+
+
+
+                    <div class="i-amphtml-scrollable-carousel-container">
+                    <amp-img src="https://ci4.googleusercontent.com/proxy/ISPijgdomCzJMe12UjThw7Pi2c2QdeoI1Ti2SN2VQ5LpaREba3_4pk6moA_TFA_CMBbl2P79i5h1_EwMZWWOPIL-OWIyJLa4bQZVW5DwZeujrAWwCQr78GONo3cYft4J3U2xsMvQyMbJwkUVeoc64-BqAWiZYkmkl8AdTM4yDnKMJEeGbLIXSfK_efvvMQbFzVL5SXouoGKJ52aJqRLqDji7Gy5OQyzmr3_sGfRDy-O8XnNaO5M3GJQ81pUw2Yn4ssovbcU=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F41232050%2F220334933170%2F1%2Foriginal.jpg?h=120&w=240&rect=0%2C0%2C1080%2C540&s=9f6c93bd767b67827f430f71c4b0c180" width="400" height="300" alt="a sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="a sample image" class="   i-amphtml-fill-content i-amphtml-replaced-content" src="">
+
+                        <!-- - - - - - - - - - HEAD SLIDE - - - - - - - - -->
+
+                 <a  href="https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref=eattnewsrecs&amp;utm_source=strongmail&amp;utm_medium=discovery&amp;utm_campaign=newsletter&amp;utm_content=EBrecommend&amp;utm_term=eventcard&amp;afu=159870568778&amp;rank=0&amp;aff=eattnewsrecs" style="text-decoration:none" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref%3Deattnewsrecs%26utm_source%3Dstrongmail%26utm_medium%3Ddiscovery%26utm_campaign%3Dnewsletter%26utm_content%3DEBrecommend%26utm_term%3Deventcard%26afu%3D159870568778%26rank%3D0%26aff%3Deattnewsrecs&amp;source=gmail&amp;ust=1521815957205000&amp;usg=AFQjCNEJ0jfbkqhiJsCPIPLBYXQQFMUQCQ">
+                Sunday(s) at I-House with According to...
+                 </a>
+
+                 <div  style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:12px;font-weight:300;line-height:18px">
+                 Thu, Mar 29
+                 </div>
+
+                 <div  style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:14px;font-weight:300;line-height:10px">
+                International House Davis, Davis
+                 </div>
+
+
+            <!-- - - - - - - - - - END HEAD SLIDE - - - - - - - - -->
+
+
+                    </amp-img>
+
+                    <amp-img src="https://ci5.googleusercontent.com/proxy/XK5X0fFko028jrHps1ChyE-06yq_Z1eTZSy35j93K5AFwz1qrLJrd2spmPd3sc03AMYoEENHeSpFloQNasgnU0-50INYHf7QQrXICpB3GPInwY0kiLM0ybJfJpW2g037XxzjirUsCkCQbRvPatPtZTWkJ-gM3gV2KD8nEEzTeSpTqdsBup62eebtZVhQ_ysvLNWER6LmNuTq71ISmg9bUiBpbLETkrRSKawwRJh754L5ZzFwwo2J5jDuGDdKLkaA5cvL7HpZ=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F42311529%2F137284379483%2F1%2Foriginal.jpg?h=120&w=240&rect=0%2C60%2C1920%2C960&s=33a9ca5deaed888248924c4049210276" width="400" height="300" alt="another sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="another sample image" class="i-amphtml-fill-content i-amphtml-replaced-content" src="">
+
+
+                        <!-- - - - - - - - - - HEAD SLIDE - - - - - - - - -->
+
+                 <a  href="https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref=eattnewsrecs&amp;utm_source=strongmail&amp;utm_medium=discovery&amp;utm_campaign=newsletter&amp;utm_content=EBrecommend&amp;utm_term=eventcard&amp;afu=159870568778&amp;rank=0&amp;aff=eattnewsrecs" style="text-decoration:none" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref%3Deattnewsrecs%26utm_source%3Dstrongmail%26utm_medium%3Ddiscovery%26utm_campaign%3Dnewsletter%26utm_content%3DEBrecommend%26utm_term%3Deventcard%26afu%3D159870568778%26rank%3D0%26aff%3Deattnewsrecs&amp;source=gmail&amp;ust=1521815957205000&amp;usg=AFQjCNEJ0jfbkqhiJsCPIPLBYXQQFMUQCQ">
+                Sunday(s) at I-House with According to...
+                 </a>
+
+                 <div  style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:12px;font-weight:300;line-height:18px">
+                 Thu, Mar 29
+                 </div>
+
+                 <div  style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:14px;font-weight:300;line-height:10px">
+                International House Davis, Davis
+                 </div>
+
+
+            <!-- - - - - - - - - - END HEAD SLIDE - - - - - - - - -->
+
+                    </amp-img>
+
+                    <amp-img src="https://ci5.googleusercontent.com/proxy/XK5X0fFko028jrHps1ChyE-06yq_Z1eTZSy35j93K5AFwz1qrLJrd2spmPd3sc03AMYoEENHeSpFloQNasgnU0-50INYHf7QQrXICpB3GPInwY0kiLM0ybJfJpW2g037XxzjirUsCkCQbRvPatPtZTWkJ-gM3gV2KD8nEEzTeSpTqdsBup62eebtZVhQ_ysvLNWER6LmNuTq71ISmg9bUiBpbLETkrRSKawwRJh754L5ZzFwwo2J5jDuGDdKLkaA5cvL7HpZ=s0-d-e1-ft#https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F42311529%2F137284379483%2F1%2Foriginal.jpg?h=120&w=240&rect=0%2C60%2C1920%2C960&s=33a9ca5deaed888248924c4049210276" width="400" height="300" alt="and another sample image" class="i-amphtml-element i-amphtml-layout-fixed i-amphtml-layout-size-defined amp-carousel-slide amp-scrollable-carousel-slide i-amphtml-layout" style="width: 400px; height: 300px;"><img decoding="async" alt="and another sample image" class="i-amphtml-fill-content i-amphtml-replaced-content" src="">
+
+                            <!-- - - - - - - - - - HEAD SLIDE - - - - - - - - -->
+
+                 <a  href="https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref=eattnewsrecs&amp;utm_source=strongmail&amp;utm_medium=discovery&amp;utm_campaign=newsletter&amp;utm_content=EBrecommend&amp;utm_term=eventcard&amp;afu=159870568778&amp;rank=0&amp;aff=eattnewsrecs" style="text-decoration:none" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.eventbrite.com/e/duo-violao-brasil-tickets-42915850464?ref%3Deattnewsrecs%26utm_source%3Dstrongmail%26utm_medium%3Ddiscovery%26utm_campaign%3Dnewsletter%26utm_content%3DEBrecommend%26utm_term%3Deventcard%26afu%3D159870568778%26rank%3D0%26aff%3Deattnewsrecs&amp;source=gmail&amp;ust=1521815957205000&amp;usg=AFQjCNEJ0jfbkqhiJsCPIPLBYXQQFMUQCQ">
+                Sunday(s) at I-House with According to...
+                 </a>
+
+                 <div  style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:12px;font-weight:300;line-height:18px">
+                 Thu, Mar 29
+                 </div>
+
+                 <div  style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;color:#666a73;font-size:14px;font-weight:300;line-height:10px">
+                International House Davis, Davis
+                 </div>
+
+
+            <!-- - - - - - - - - - END HEAD SLIDE - - - - - - - - -->
+
+                    </amp-img>
+
+                    </div><div class="amp-carousel-button amp-carousel-button-prev amp-disabled" role="button" aria-label="Previous item in carousel" tabindex="0" aria-disabled="true"></div><div class="amp-carousel-button amp-carousel-button-next" role="button" aria-label="Next item in carousel" tabindex="0" aria-disabled="false">
+
+                    </div>
+
+                    </amp-carousel>
+                    <!-- - - - - - - - - - END CARROUSEL  - - - - - - - - -->
+
+                    <!-- - - - - - - - - - BUTTOM - - - - - - - - -->
+
+        <div style="font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;padding:0;text-align:center" align="center">
+         <a href="https://admin.evbqa.com/admin/email-preview/.com/u/179892558?ref=eattnewssaved&utm_source=strongmail&utm_medium=discovery&utm_campaign=newsletter&utm_content=EBrecommend" style="background-color:#f6682f;display:inline-block;line-height:20px;font-weight:500;font-size:14px;text-align:center;text-decoration:none;padding:10px 32px 10px 32px;color:#fff;border-radius:40px;margin-bottom:32px;margin-top:30px" class="m_-8784778928101538030m_7967521110313607077btn m_-8784778928101538030m_7967521110313607077call_to_action" align="center" bgcolor="#F6682F" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.eventbrite.com/d/?ref%3Deattnewsrecs%26utm_source%3Dstrongmail%26utm_medium%3Ddiscovery%26utm_campaign%3Dnewsletter%26utm_content%3DEBrecommend&amp;source=gmail&amp;ust=1521815957206000&amp;usg=AFQjCNHMeAacYU2r9tzTGXGh6kYqiNLv1g">
+         See all saved events
+         </a>
+        </div>
+         <!-- - - - - - - - - - END BuTTOM - - - - - - - - -->
+        <!-- - - - - - - - - - END CONTENT - - - - - - - - -->
+
+                    </div>
                 </amp-selector>
                 <!-- - - - - - - - - - END TABS & CARROUSEL  - - - - - - - - -->
 
+<br>
+
+
 
 </td></tr>
-
-                <tr>
-                    <td class="row_section" style="
-                    padding: 0;
-                 
-                    margin-left: auto;
-                    margin-right: auto;
-                ">
-                        <table style="
-                    padding: 0;
-                 
-                    border:0;
-                    border-collapse:collapse;
-                    border-spacing:0;
-                    margin-left:32px;
-                    margin-right:32px;
-                    width:536px;
-                 " class="content" cellspacing="0" cellpadding="0" width="536" bgcolor="">
-                            
-                    <!--[if mso]>
-                        <td height="1" style="line-height:1px; font-size:1px;" bgcolor="#DEDEDE">&nbsp;</td>
-                    <![endif]-->
-                    
-                <tbody><tr class="small_full_width" style="">
-                    <td class="grid__col" style="
-                    padding: 0;
-                 
-                    text-align: left;
-                " align="left">
-                        
-                        <div class="divider" style="background-color:#DEDEDE; 
-                    width: 100%;
-                    height: 1px;
-                    margin: 15px auto 0px;
-                " height="1" width="100%" bgcolor="#DEDEDE">
-                    
-                    </div></td>
-                </tr>
-
-                
-                        </tbody></table>
-                    </td>
-                </tr>
-
                     <!-- End Body -->
 
     <tr>
@@ -456,27 +487,15 @@
     <![endif]-->
 
     <tbody><tr class="footer__info align-center" style="">
-        <td class="grid__col" style="
-        padding: 0;
-
-    font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
-
-    text-align: center;
-
+        <td class="grid__col" style="padding: 0;font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;text-align: center;
     font-size: 12px;
     font-weight: 200;
     line-height: 18px;
     padding: 0px 32px;
 " align="center">
-
-
-
     <div class="top-row footer-row__text" style="
     padding: 0;
 ">
-
-
-
             <a style="" href="https://www..com" class="">
             <!--[if !mso]><!-- -->
                 <div style="
@@ -503,7 +522,7 @@
 
 
             <div class="top-row heading_find-next-experience" style="
-    font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
+    font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
 
     padding:0;
     color:#282c35;
@@ -567,7 +586,7 @@
     <![endif]-->
     <!--[if !((mso)|(ie))]><!-- -->
     <div style="
-        font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
+        font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
 
         padding: 0;
 
@@ -629,7 +648,7 @@
         <td class="grid__col" style="
         padding: 0;
 
-    font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
+    font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
 
     text-align: center;
 
@@ -646,7 +665,7 @@
         <![endif]-->
 
     <div class="top-row social__title" style="
-    font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
+    font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
 
     font-size: 14px;
 
@@ -834,7 +853,7 @@
         <td class="grid__col" style="
         padding: 0;
 
-    font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
+    font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
 
     text-align: center;
 
@@ -851,7 +870,7 @@
         <![endif]-->
 
     <div class="top-row footer-row__text" style="
-    font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
+    font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
 
     padding:0;
     padding-bottom: 8px;
@@ -872,14 +891,11 @@
 
 
     <div class="footer-row__text" style="
-    font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
+    font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
 
     padding:0;
     padding-bottom: 8px;
 ">
-
-
-
             <a style="" href="https://www..com" class="">
             <!--[if !mso]><!-- -->
                 <div style="
@@ -912,7 +928,7 @@
         <![endif]-->
 
     <div class="footer-row__text" style="
-    font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
+    font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
 
     padding:0;
     padding-bottom: 8px;
@@ -936,7 +952,7 @@
         <![endif]-->
 
     <div class="footer-row__text" style="
-    font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
+    font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
 
     padding:0;
     padding-bottom: 8px;
@@ -957,7 +973,7 @@
         <![endif]-->
 
     <div class="footer-row__text last_row" style="
-    font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
+    font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
 
     padding:0;
     padding-bottom: 8px;
