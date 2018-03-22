@@ -7,6 +7,18 @@
         <meta name="format-detection" content="address=no">
         <link rel="stylesheet" type="text/css" href="styles.css">
 
+         <!-- AMP -->
+            <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <!-- #### Setup -->
+    <!-- Import `amp-selector` component in the header which we'll use to implement the tab switching. -->
+    <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+    <!-- Import `amp-carousel` component in the header which we'll use as a sample tab content -->
+    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+    <!-- Import `amp-bind` component in the header which we'll use to switch tabs via buttons -->
+    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+    <!-- There's just a bit of css that's needed -->
+        <!-- END AMP -->
+
     </head>
 
     <!-- Global container with background styles. Gmail converts BODY to DIV so we lose properties like BGCOLOR. -->
@@ -20,7 +32,7 @@
         <![endif]-->
 
             <table style="padding: 0;border:0;border-collapse:collapse;border-spacing:0;margin-left: auto;margin-right: auto;max-width: 600px;width: 600px;background-color: #FFFFFF;" class="principal" celpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" width="600">
-                
+
                 <tbody><tr>
                     <!--[if mso]>
                         <td class="grid__col" height="4" style="line-height:1px; font-size:1px;" bgcolor="#F6682F" width="600">&nbsp;</td>
@@ -47,19 +59,79 @@
                     </td>
                 </tr>
                 <!-- Body -->
+<style amp-custom>
+        .ampTabContainer {
+            display: flex;
+            flex-wrap: wrap;
+        }
 
-                <!-- End Body -->
-  
+        .tabButton[selected] {
+            outline: none;
+            background: #ccc;
+        }
+
+        .tabButton {
+            list-style: none;
+            flex-grow: 1;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .tabContent {
+            display: none;
+            width: 100%;
+            order: 1; /* must be greater than the order of the tab buttons to flex to the next line */
+            border: 1px solid #ccc;
+        }
+
+        .tabButton[selected]+.tabContent {
+            display: block;
+        }
+
+        /* For example below (not required) */
+        .itemCustom {
+            border: 1px solid #000;
+            height: 280px;
+            width: 380px;
+            margin: 10px;
+            text-align: center;
+            padding-top: 140px;
+        }
+        amp-selector {
+          padding: 1rem;
+          margin: 1rem;
+        }
+    </style>
+                <tr><td>
+
+                <amp-selector on="select:AMP.setState({selectedTab: event.targetOption})" [selected]="selectedTab" role="tablist" layout="container" class="ampTabContainer">
+                    <div role="tab" class="tabButton" selected option="a">ONE</div>
+                    <div role="tabpanel" class="tabContent">ONE</div>
+                    <div role="tab" class="tabButton" option="c">TWO</div>
+                    <div role="tabpanel" class="tabContent">TWO</div>
+                    <div role="tab" class="tabButton" option="c">THREE</div>
+                    <div role="tabpanel" class="tabContent">THREE</div>
+                </amp-selector>
+</td></tr>
+
+
+
+
+
+
+
+                    <!-- End Body -->
+
     <tr>
         <td class="row_section" style="
         padding: 0;
-     
+
         margin-left: auto;
         margin-right: auto;
     ">
             <table style="
         padding: 0;
-     
+
         border:0;
         border-collapse:collapse;
         border-spacing:0;
@@ -67,63 +139,63 @@
         margin-right:32px;
         width:536px;
      " class="content" cellspacing="0" cellpadding="0" width="536" bgcolor="">
-                
+
     <!--[if (mso)|(ie)]>
         <tr>
             <td class="grid__col" height="32" style="line-height:1px; font-size:1px;" width="600">&nbsp;</td>
         </td>
     <![endif]-->
-    
+
     <tbody><tr class="footer__info align-center" style="">
         <td class="grid__col" style="
         padding: 0;
-     
+
     font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
- 
+
     text-align: center;
- 
+
     font-size: 12px;
     font-weight: 200;
     line-height: 18px;
     padding: 0px 32px;
 " align="center">
-            
-            
-    
+
+
+
     <div class="top-row footer-row__text" style="
     padding: 0;
 ">
-        
-        
-    
+
+
+
             <a style="" href="https://www..com" class="">
             <!--[if !mso]><!-- -->
                 <div style="
         padding: 0;
     ">
             <!--<![endif]-->
-                    
-            
+
+
                 <img src="https://cdn.evbstatic.com/s3-build/perm_001/06fd00/django/images/email/newsletters/E.png" class="footer-eb-logo__image" style="
     height:56px;
     max-width:100%;
     padding:32px 0 16px;
     width:56px;
 " alt="Eventbrite" scale="0" height="56" width="56">
-            
-        
+
+
             <!--[if !mso]><!-- -->
                 </div>
             <!--<![endif]-->
             </a>
 
-    
+
     </div>
 
 
             <div class="top-row heading_find-next-experience" style="
     font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
- 
+
     padding:0;
     color:#282c35;
     font-size:17px;
@@ -132,7 +204,7 @@
 " height="25">
                 Find your next experience on Eventbrite
             </div>
-    
+
         </td>
     </tr>
 
@@ -146,13 +218,13 @@
     <tr>
         <td class="row_section" style="
         padding: 0;
-     
+
         margin-left: auto;
         margin-right: auto;
     ">
             <table style="
         padding: 0;
-     
+
         border:0;
         border-collapse:collapse;
         border-spacing:0;
@@ -160,16 +232,16 @@
         margin-right:32px;
         width:536px;
      " class="content" cellspacing="0" cellpadding="0" width="536" bgcolor="">
-                
-    
+
+
     <tbody><tr class="small_full_width" style="">
         <td class="grid__col" style="
         padding: 0;
-     
+
     text-align: left;
 " align="left">
-            
-            
+
+
     <!--[if (mso)|(ie)]>
     <table align="center" border="0" cellspacing="0" cellpadding="0">
         <tr>
@@ -187,12 +259,12 @@
     <!--[if !((mso)|(ie))]><!-- -->
     <div style="
         font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
-     
+
         padding: 0;
-     
+
         text-align: center;
     " align="center">
-        <a href=".com/eventbriteapp?app_cta_src=email_footer" target="_blank" style="background-color:#FFFFFF; 
+        <a href=".com/eventbriteapp?app_cta_src=email_footer" target="_blank" style="background-color:#FFFFFF;
         display: inline-block;
         line-height: 20px;
         font-weight: 500;
@@ -200,7 +272,7 @@
         text-align: center;
         text-decoration: none;
         padding: 10px 32px 10px 32px;
-     
+
     color: #45494E;
     border: 1px solid #EFF2F5;
     border-radius: 40px;
@@ -212,7 +284,7 @@
     </div>
     <!--<![endif]-->
 
-    
+
         </td>
     </tr>
 
@@ -227,13 +299,13 @@
     <tr>
         <td class="row_section" style="
         padding: 0;
-     
+
         margin-left: auto;
         margin-right: auto;
     ">
             <table style="
         padding: 0;
-     
+
         background-color: #EFF2F5;
         border:0;
         border-collapse:collapse;
@@ -242,38 +314,38 @@
         width:600px;
         color:#222!important;
      " class="footer-content bottom-section" cellspacing="0" cellpadding="0" width="600" bgcolor="#EFF2F5">
-                
-    
+
+
     <tbody><tr class="footer__info align-center" style="">
         <td class="grid__col" style="
         padding: 0;
-     
+
     font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
- 
+
     text-align: center;
- 
+
     font-size: 12px;
     font-weight: 200;
     line-height: 18px;
     padding: 0px 32px;
 " align="center">
-            
+
         <!--[if (mso)|(ie)]>
         <table align="center" border="0" cellspacing="0" cellpadding="0" width="100%" style="text-align:center; width:100%;">
             <tr>
                 <td style="text-align:center; padding:16px 6px; border:0px;font-size: 14px;line-height:18px;font-weight: 200;">
         <![endif]-->
-            
+
     <div class="top-row social__title" style="
     font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
- 
+
     font-size: 14px;
- 
+
     padding-top: 24px;
 ">
-        
+
                 Let’s be friends
-            
+
     </div>
 
         <!--[if (mso)|(ie)]>
@@ -292,7 +364,7 @@
     display:inline-block;
     height:auto;
     margin:0;
- 
+
     text-align: right;
 " height="auto" align="right">
             <a href="http://www.twitter.com/Eventbrite">
@@ -318,7 +390,7 @@
     display:inline-block;
     height:auto;
     margin:0;
- 
+
     text-align: center;
 " height="auto" align="center">
             <a href="https://www.facebook.com/Eventbrite" target="_blank" aria-label="Eventbrite Facebook">
@@ -345,7 +417,7 @@
     display:inline-block;
     height:auto;
     margin:0;
- 
+
     text-align: left;
 " height="auto" align="left">
             <a href="https://www.instagram.com/eventbrite/" target="_blank" aria-label="Eventbrite Instagram">
@@ -364,7 +436,7 @@
             </tr>
         </table>
         <![endif]-->
-    
+
         </td>
     </tr>
 
@@ -378,13 +450,13 @@
     <tr>
         <td class="row_section" style="
         padding: 0;
-     
+
         margin-left: auto;
         margin-right: auto;
     ">
             <table style="
         padding: 0;
-     
+
         background-color: #EFF2F5;
         border:0;
         border-collapse:collapse;
@@ -393,7 +465,7 @@
         width:600px;
         color:#222!important;
      " class="footer-content bottom-section" cellspacing="0" cellpadding="0" width="600" bgcolor="#EFF2F5">
-                
+
     <!--[if mso]>
     <tr>
         <td width="100%">
@@ -405,19 +477,19 @@
         </td>
     </tr>
     <![endif]-->
-    
+
     <tbody><tr class="small_full_width" style="">
         <td class="grid__col" style="
         padding: 0;
      padding:0 32px;" align="center">
-            
-        <div class="divider medium-width" style="background-color:#dedede; 
+
+        <div class="divider medium-width" style="background-color:#dedede;
     padding: 0px 32px;
     height:1px;
     margin:15px auto 0;
     width:70%;
 " bgcolor="#dedede" height="1" width="70%">
-    
+
         </div></td>
     </tr>
 
@@ -431,13 +503,13 @@
     <tr>
         <td class="row_section" style="
         padding: 0;
-     
+
         margin-left: auto;
         margin-right: auto;
     ">
             <table style="
         padding: 0;
-     
+
         background-color: #EFF2F5;
         border:0;
         border-collapse:collapse;
@@ -446,40 +518,40 @@
         width:600px;
         color:#222!important;
      " class="footer-content bottom-section" cellspacing="0" cellpadding="0" width="600" bgcolor="#EFF2F5">
-                
 
-    
+
+
     <tbody><tr class="footer__info align-center" style="">
         <td class="grid__col" style="
         padding: 0;
-     
+
     font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
- 
+
     text-align: center;
- 
+
     font-size: 12px;
     font-weight: 200;
     line-height: 18px;
     padding: 0px 32px;
 " align="center">
-            
+
         <!--[if (mso)|(ie)]>
         <table align="center" border="0" cellspacing="0" cellpadding="0" width="100%" style="text-align:center; width:100%;">
             <tr>
                 <td style="text-align:center; padding:16px 6px; border:0px;font-size: 12px;line-height: 18px;font-weight: 200;">
         <![endif]-->
-        
+
     <div class="top-row footer-row__text" style="
     font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
- 
+
     padding:0;
     padding-bottom: 8px;
- 
+
     padding-top: 24px;
 ">
-        
+
             Brought to you by the fine folks at
-        
+
     </div>
 
         <!--[if (mso)|(ie)]>
@@ -488,38 +560,38 @@
             <tr>
                 <td style="text-align:center; padding-bottom:12px; border:0px;">
         <![endif]-->
-        
-    
+
+
     <div class="footer-row__text" style="
     font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
- 
+
     padding:0;
     padding-bottom: 8px;
 ">
-        
-        
-    
+
+
+
             <a style="" href="https://www..com" class="">
             <!--[if !mso]><!-- -->
                 <div style="
         padding: 0;
     ">
             <!--<![endif]-->
-                    
-            
+
+
             <img src="https://cdn.evbstatic.com/s3-build/perm_001/bc9462/django/images/email/newsletters/logo-footer-eventbrite.png" class="footer-logo__image" style="
     height: 27px;
     padding: 8px 0;
     width: 142px;
 " height="27" width="142" alt="Eventbrite">
-        
-        
+
+
             <!--[if !mso]><!-- -->
                 </div>
             <!--<![endif]-->
             </a>
 
-    
+
     </div>
 
 
@@ -529,22 +601,22 @@
             <tr>
                 <td style="text-align:center; padding-bottom: 6px; border:0px;font-size: 12px;line-height: 18px;font-weight: 200;">
         <![endif]-->
-        
+
     <div class="footer-row__text" style="
     font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
- 
+
     padding:0;
     padding-bottom: 8px;
 ">
-        
-        
 
-            <span>This email was sent to 
-    
+
+
+            <span>This email was sent to
+
         <a style="color: #007F8C;" href="mailto:test@evbqa.com" target="_blank" class="">test@evbqa.com</a>
 </span>
 
-        
+
     </div>
 
         <!--[if (mso)|(ie)]>
@@ -553,19 +625,19 @@
             <tr>
                 <td style="text-align:center; padding-bottom:6px; border: 0px;font-size: 12px;line-height: 18px;font-weight: 200;">
         <![endif]-->
-        
+
     <div class="footer-row__text" style="
     font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
- 
+
     padding:0;
     padding-bottom: 8px;
 ">
-        
-            
-    
+
+
+
         <a style="color: #007F8C;" href="https://www..com" target="_blank" class="">Eventbrite</a>
   | 155 5th St, 7th Floor | San Francisco, CA 94103
-        
+
     </div>
 
         <!--[if (mso)|(ie)]>
@@ -574,18 +646,18 @@
             <tr>
                 <td style="text-align:center; padding-bottom:6px; border:0px;font-size: 12px;line-height:18px;font-weight: 200;">
         <![endif]-->
-        
+
     <div class="footer-row__text last_row" style="
     font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;
- 
+
     padding:0;
     padding-bottom: 8px;
- 
+
     padding-bottom: 24px;
 ">
-        
+
             © 2018 Eventbrite. All rights reserved.
-        
+
     </div>
 
         <!--[if (mso)|(ie)]>
@@ -593,7 +665,7 @@
             </tr>
         </table>
         <![endif]-->
-    
+
         </td>
     </tr>
 
@@ -612,6 +684,6 @@
                 </table>
             <![endif]-->
         </div>
-    
+
 
 </body></html>
