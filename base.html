@@ -49,7 +49,68 @@
                     </td>
                 </tr>
                 <!-- Body -->
+
 <style amp-custom>
+
+
+.tab {
+  display: inline-block;
+  margin: 0 0 -1px;
+  padding: 15px 25px;
+  font-weight: 600;
+  text-align: center;
+  color: #bbb;
+  border: 0px solid transparent;
+}
+
+.tab[selected] {
+
+  color: #f6682f;
+  background: #fff;
+  border: 0px solid transparent;
+
+}
+
+.tab:before {
+ color: #f6682f;
+  font-family: fontawesome;
+  font-weight: normal;
+  margin-right: 10px;
+}
+
+label[for*='1']:before { content: '\f1cb'; }
+label[for*='2']:before { content: '\f17d'; }
+label[for*='3']:before { content: '\f16b'; }
+label[for*='4']:before { content: '\f1a9'; }
+
+.tab:hover {
+  color: #f6682f;
+  cursor: pointer;
+}
+
+
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3,
+#tab4:checked ~ #content4 {
+  display: block;
+}
+
+@media screen and (max-width: 650px) {
+  .tab {
+    font-size: 0;
+  }
+  .tab:before {
+    margin: 0;
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .tab {
+    padding: 15px;
+  }
+}
         .ampTabContainer {
             display: flex;
             flex-wrap: wrap;
@@ -57,10 +118,15 @@
 
         .tabButton[selected] {
             outline: none;
-            background: #ccc;
-        }
+            border: 0px solid transparent;
 
+        }
+amp-selector [option][selected] {
+    cursor: auto;
+    outline: 0px solid transparent;
+}
         .tabButton {
+            border: 0px solid transparent;
             list-style: none;
             flex-grow: 1;
             text-align: center;
@@ -68,19 +134,23 @@
         }
 
         .tabContent {
+            border: 0px solid transparent;
             display: none;
             width: 100%;
             order: 1; /* must be greater than the order of the tab buttons to flex to the next line */
-            border: 1px solid #ccc;
+
         }
 
         .tabButton[selected]+.tabContent {
             display: block;
+            color: #f6682f;
+            border: 0px solid transparent;
         }
 
         /* For example below (not required) */
         .itemCustom {
-            border: 1px solid #000;
+            border: 0px solid transparent;
+
             height: 280px;
             width: 380px;
             margin: 10px;
@@ -95,7 +165,8 @@
                 <tr><td>
 <!-- - - - - - - - - -TABS & CARROUSEL  - - - - - - - - -->
 <amp-selector on="select:AMP.setState({selectedTab: event.targetOption})" [selected]="selectedTab" role="tablist" layout="container" class="ampTabContainer">
-                    <div role="tab" class="tabButton" selected option="a">Events for you</div>
+
+                    <div role="tab" class="tabButton tab" selected option="a">Events for you</div>
                     <div role="tabpanel" class="tabContent">
                     <!-- - - - - - - - - - CONTENT - - - - - - - - -->
                     <!-- - - - - - - - - - START CARROUSEL  - - - - - - - - -->
@@ -180,14 +251,14 @@
 
         <div style="font-family:&quot;Benton Sans&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,Helvetica,Tahoma,Arial,sans-serif;padding:0;text-align:center" align="center">
          <a href="https://admin.evbqa.com/admin/email-preview/.com/u/179892558?ref=eattnewssaved&utm_source=strongmail&utm_medium=discovery&utm_campaign=newsletter&utm_content=EBrecommend" style="background-color:#f6682f;display:inline-block;line-height:20px;font-weight:500;font-size:14px;text-align:center;text-decoration:none;padding:10px 32px 10px 32px;color:#fff;border-radius:40px;margin-bottom:32px;margin-top:30px" class="m_-8784778928101538030m_7967521110313607077btn m_-8784778928101538030m_7967521110313607077call_to_action" align="center" bgcolor="#F6682F" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.eventbrite.com/d/?ref%3Deattnewsrecs%26utm_source%3Dstrongmail%26utm_medium%3Ddiscovery%26utm_campaign%3Dnewsletter%26utm_content%3DEBrecommend&amp;source=gmail&amp;ust=1521815957206000&amp;usg=AFQjCNHMeAacYU2r9tzTGXGh6kYqiNLv1g">
-         See all saved events
+         View all recommended
          </a>
         </div>
          <!-- - - - - - - - - - END BuTTOM - - - - - - - - -->
         <!-- - - - - - - - - - END CONTENT - - - - - - - - -->
 
                     </div>
-                    <div role="tab" class="tabButton" option="b">Weekend guide</div>
+                    <div role="tab" class="tabButton tab" option="b">Weekend guide</div>
 
                     <div role="tabpanel" class="tabContent">
 
@@ -281,7 +352,7 @@
         <!-- - - - - - - - - - END CONTENT - - - - - - - - -->
 
                     </div>
-                    <div role="tab" class="tabButton" option="c">Your saved events</div>
+                    <div role="tab" class="tabButton tab" option="c">Your saved events</div>
                     <div role="tabpanel" class="tabContent">
 
                   <!-- - - - - - - - - - CONTENT - - - - - - - - -->
