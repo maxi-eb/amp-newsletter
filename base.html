@@ -1,433 +1,427 @@
 <!doctype html>
 <html ⚡4email>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <!-- AMP -->
+        <script async src="https://cdn.ampproject.org/v0.js"></script>
+        <!-- #### Setup -->
+        <!-- Import `amp-selector` component in the header which we'll use to implement the tab switching. -->
+        <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+        <!-- Import `amp-carousel` component in the header which we'll use as a sample tab content -->
+        <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+        <!-- We use the `amp-list` component to dynamically render the initial state of the favorite button. -->
+        <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
+        <!-- The mustache component is required by `amp-list`.  -->
+        <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.1.js"></script>
+        <!-- We need `amp-form` to submit the favorite request.  -->
+        <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+        <!-- `amp-bind` enables us to dynamically change the button state when we submit the form.  -->
+        <!-- Import `amp-bind` component in the header which we'll use to switch tabs via buttons -->
+        <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+        <!-- END AMP -->
+        <!-- Turn off iOS phone number autodetect -->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="format-detection" content="address=no">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <style amp-custom>
 
-<head>
-    <meta charset="UTF-8">
-    <!-- AMP -->
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <!-- #### Setup -->
-    <!-- Import `amp-selector` component in the header which we'll use to implement the tab switching. -->
-    <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
-    <!-- Import `amp-carousel` component in the header which we'll use as a sample tab content -->
-    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
-    <!-- We use the `amp-list` component to dynamically render the initial state of the favorite button. -->
-    <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
-    <!-- The mustache component is required by `amp-list`.  -->
-    <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.1.js"></script>
-    <!-- We need `amp-form` to submit the favorite request.  -->
-    <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
-    <!-- `amp-bind` enables us to dynamically change the button state when we submit the form.  -->
-    <!-- Import `amp-bind` component in the header which we'll use to switch tabs via buttons -->
-    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
-    <!-- END AMP -->
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <style amp-custom>
-        td {
-            padding: 0;
-        }
-
-        input {
-            outline: none !important;
-        }
-
-        .ampTabContainer {
-            padding-top: 0px;
-            padding-bottom: 0px;
-        }
-
-        .tabButton[selected] {
-            outline: none !important;
-            border-bottom: 2px solid #f6682f;
-            color: #f6682f !important;
-        }
-
-        .tabButton:focus {
-            outline: none !important;
-        }
-
-        .tabButton {
-            font-weight: 500;
-            list-style: none;
-            flex-grow: 1;
-            text-align: center;
-            cursor: pointer;
-            border-color: transparent;
-            background: #FFF;
-            color: #666A73;
-            fill: #FFFFFF;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            box-sizing: border-box;
-            text-align: center;
-            text-decoration: none;
-            line-height: 20px;
-            letter-spacing: 0.2px;
-            font-size: 16px;
-            margin: 10px 0px;
-            display: inline-block;
-        }
-
-        .tabButton:hover {
-            color: #000;
-        }
-
-        .tabContent {
-            display: none;
-            width: 100%;
-            order: 1;
-            /* must be greater than the order of the tab buttons to flex to the next line */
-            padding: 10px 0px;
-        }
-
-        .ampTabContainer[selected="a"] .tabContent[content="a"] {
-            display: block;
-        }
-
-        .ampTabContainer[selected="b"] .tabContent[content="b"] {
-            display: block;
-        }
-
-        .ampTabContainer[selected="c"] .tabContent[content="c"] {
-            display: block;
-        }
-
-        /* For example below (not required) */
-
-        .itemCustom {
-            border: 1px solid #000;
-            height: 280px;
-            width: 380px;
-            margin: 10px;
-            text-align: center;
-            padding-top: 140px;
-        }
-
-        amp-selector {
-            padding: 0 1rem;
-            margin: 0 1rem;
-        }
-
-        .tabs-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            width: 100%;
-        }
-
-        .tabContent {
-            border: 0px solid transparent;
-            display: none;
-            width: 100%;
-            order: 1;
-            /* must be greater than the order of the tab buttons to flex to the next line */
-        }
-
-        /* For example below (not required) */
-
-        .itemCustom {
-            border: 0px solid transparent;
-
-            height: 280px;
-            width: 380px;
-            margin: 10px;
-            text-align: center;
-            padding-top: 140px;
-        }
-
-        .carouselPanel {
-            width: 536px;
-        }
-
-        .event-image img {
-            width: 100%;
-        }
-
-        .i-amphtml-slides-container {
-            position: relative !important;
-        }
-
-        .event-date,
-        .event-details,
-        .event-like {
-            padding: 10px;
-            float: left;
-        }
-
-        .event-like {
-            width: 76px;
-            text-align: center;
-        }
-
-        .event-details .name {
-            font-weight: 300;
-        }
-
-        .event-details {
-            width: 350px;
-        }
-
-        .event-date {
-            width: 50px;
-            text-align: center;
-        }
-
-        .event-date .month {
-            color: #f6682f;
-            font-weight: normal;
-        }
-
-        .event-date .day {
-            font-weight: normal;
-        }
-
-        .organizer {
-            font-size: 12px;
-            font-weight: 200;
-        }
-
-        .location {
-            font-weight: 200;
-        }
-
-        @media all and (max-width: 480px) {
-            .tabs {
-                display: block;
-                width: 100%;
-                overflow-x: scroll;
-                overflow-y: hidden;
-                white-space: nowrap;
+            input {
+                outline: none !important;
+            }
+            .ampTabContainer {
+                padding-top: 0px;
+                padding-bottom: 0px;
             }
 
-            .tabs-wrapper {
-                width: 0px;
-                display: block;
+            .tabButton[selected] {
+                outline: none !important;
+                border-bottom: 2px solid #f6682f;
+                color: #f6682f !important;
+            }
+
+            .tabButton:focus {
+                outline: none !important;
             }
 
             .tabButton {
+                font-weight: 500;
+                list-style: none;
+                flex-grow: 1;
+                text-align: center;
+                cursor: pointer;
+                border-color: transparent;
+                background: #FFF;
+                color: #666A73;
+                fill: #FFFFFF;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                box-sizing: border-box;
+                text-align: center;
+                text-decoration: none;
+                line-height: 20px;
+                letter-spacing: 0.2px;
+                font-size: 16px;
+                margin: 10px 0px;
                 display: inline-block;
-                padding: 20px;
-                margin: 0px;
             }
-            .ampTabContainer {
+
+            .tabButton:hover {
+                color: #000;
+            }
+
+            .tabContent {
+                display: none;
                 width: 100%;
-                margin: 0 !important;
+                order: 1;
+                /* must be greater than the order of the tab buttons to flex to the next line */
+                padding: 10px 0px;
             }
+
+            .ampTabContainer[selected="a"] .tabContent[content="a"] {
+                display: block;
+            }
+
+            .ampTabContainer[selected="b"] .tabContent[content="b"] {
+                display: block;
+            }
+
+            .ampTabContainer[selected="c"] .tabContent[content="c"] {
+                display: block;
+            }
+
+            /* For example below (not required) */
+
+            .itemCustom {
+                border: 1px solid #000;
+                height: 280px;
+                width: 380px;
+                margin: 10px;
+                text-align: center;
+                padding-top: 140px;
+            }
+
             amp-selector {
-                padding: 0;
-                margin: 0 !important;
+                padding: 0 1rem;
+                margin: 0 1rem;
             }
-            .carouselPanel {
+
+            .tabs-wrapper {
+                display: flex;
+                flex-wrap: wrap;
                 width: 100%;
             }
+
+            .tabContent {
+                border: 0px solid transparent;
+                display: none;
+                width: 100%;
+                order: 1;
+                /* must be greater than the order of the tab buttons to flex to the next line */
+            }
+
+            /* For example below (not required) */
+
+            .itemCustom {
+                border: 0px solid transparent;
+
+                height: 280px;
+                width: 380px;
+                margin: 10px;
+                text-align: center;
+                padding-top: 140px;
+            }
+
+            .carouselPanel {
+                width: 536px;
+            }
+
+            .event-image img {
+                width: 100%;
+            }
+
+            .i-amphtml-slides-container {
+                position: relative !important;
+            }
+
             .event-date,
+            .event-details,
+            .event-like {
+                padding: 10px;
+                float: left;
+            }
+
+            .event-like {
+                width: 76px;
+                text-align: center;
+            }
+
+            .event-details .name {
+                font-weight: 300;
+            }
+
+            .event-details {
+                width: 350px;
+            }
+
+            .event-date {
+                width: 50px;
+                text-align: center;
+            }
+
+            .event-date .month {
+                color: #f6682f;
+                font-weight: normal;
+            }
+
+            .event-date .day {
+                font-weight: normal;
+            }
+
+            .organizer {
+                font-size: 12px;
+                font-weight: 200;
+            }
+
+            .location {
+                font-weight: 200;
+            }
+
+            @media all and (max-width: 480px) {
+                .tabs {
+                    display: block;
+                    width: 100%;
+                    overflow-x: scroll;
+                    overflow-y: hidden;
+                    white-space: nowrap;
+                }
+
+                .tabs-wrapper {
+                    width: 0px;
+                    display: block;
+                }
+
+                .tabButton {
+                    display: inline-block;
+                    padding: 20px;
+                    margin: 0px;
+                }
+                .ampTabContainer {
+                    width: 100%;
+                    margin: 0 !important;
+                }
+                amp-selector {
+                    padding: 0;
+                    margin: 0 !important;
+                }
+                .carouselPanel {
+                    width: 100%;
+                }
+                .event-date,
                 .event-details,
                 .event-like {
-                padding: 5px;
-            }
-            .event-date {
-                width: 15%;
-            }
-            .event-details {
-                width: 60%;
-            }
+                    padding: 5px;
+                }
+                .event-date {
+                    width: 15%;
+                }
+                .event-details {
+                    width: 60%;
+                }
                 .event-like {
                     width: 15%;
                 }
 
-        }
-    </style>
-    <style amp-boilerplate>
-        body {
-            -webkit-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
-            -moz-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
-            -ms-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
-            animation: -amp-start 8s steps(1, end) 0s 1 normal both
-        }
-
-        @-webkit-keyframes -amp-start {
-            from {
-                visibility: hidden
-            }
-            to {
-                visibility: visible
-            }
-        }
-
-        @-moz-keyframes -amp-start {
-            from {
-                visibility: hidden
-            }
-            to {
-                visibility: visible
-            }
-        }
-
-        @-ms-keyframes -amp-start {
-            from {
-                visibility: hidden
-            }
-            to {
-                visibility: visible
-            }
-        }
-
-        @-o-keyframes -amp-start {
-            from {
-                visibility: hidden
-            }
-            to {
-                visibility: visible
-            }
-        }
-
-        @keyframes -amp-start {
-            from {
-                visibility: hidden
-            }
-            to {
-                visibility: visible
-            }
-        }
-    </style>
-    <noscript>
-        <style amp-boilerplate>
-            body {
-                -webkit-animation: none;
-                -moz-animation: none;
-                -ms-animation: none;
-                animation: none
             }
         </style>
-    </noscript>
-    <style amp-custom>
-        /* some basic button styling */
+        <style amp-boilerplate>
+            body {
+                -webkit-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+                -moz-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+                -ms-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+                animation: -amp-start 8s steps(1, end) 0s 1 normal both
+            }
 
-        input[type=submit] {
-            width: 32px;
-            height: 32px;
-            cursor: pointer;
-            border: none;
-            margin: 4px;
-            transition: background 300ms ease-in-out;
-        }
+            @-webkit-keyframes -amp-start {
+                from {
+                    visibility: hidden
+                }
+                to {
+                    visibility: visible
+                }
+            }
 
-        amp-list {
-            margin: 1rem;
-        }
+            @-moz-keyframes -amp-start {
+                from {
+                    visibility: hidden
+                }
+                to {
+                    visibility: visible
+                }
+            }
 
-        .heart-fill {
-            background: url('data:image/svg+xml;utf8,<svg fill="%23F8922D" height="32" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
-        }
+            @-ms-keyframes -amp-start {
+                from {
+                    visibility: hidden
+                }
+                to {
+                    visibility: visible
+                }
+            }
 
-        .heart-border {
-            background: url('data:image/svg+xml;utf8,<svg fill="%23F8922D" height="32" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>');
-        }
+            @-o-keyframes -amp-start {
+                from {
+                    visibility: hidden
+                }
+                to {
+                    visibility: visible
+                }
+            }
 
-        /* While the page loads we show a grey heart icon to indicate that the functionality is not yet available. */
+            @keyframes -amp-start {
+                from {
+                    visibility: hidden
+                }
+                to {
+                    visibility: visible
+                }
+            }
+        </style>
+        <noscript>
+            <style amp-boilerplate>
+                body {
+                    -webkit-animation: none;
+                    -moz-animation: none;
+                    -ms-animation: none;
+                    animation: none
+                }
+            </style>
+        </noscript>
+        <style amp-custom>
+            /* some basic button styling */
 
-        .heart-loading,
-        .heart-loading[placeholder] {
-            background: url('data:image/svg+xml;utf8,<svg fill="%23fde6ce" height="32" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>');
-        }
+            input[type=submit] {
+                width: 32px;
+                height: 32px;
+                cursor: pointer;
+                border: none;
+                margin: 4px;
+                transition: background 300ms ease-in-out;
+            }
 
-        .favorite-container {}
+            amp-list {
+                margin: 1rem;
+            }
 
-        .favorite-count {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8px;
-            margin-left: 8px;
-            position: relative;
-            width: 48px;
-            background: #b60845;
-            border-radius: .4em;
-            color: white;
-        }
+            .heart-fill {
+                background: url('data:image/svg+xml;utf8,<svg fill="%23F8922D" height="32" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+            }
 
-        .favorite-count.loading {
-            color: #ccc;
-            background: #f2f2f2;
-        }
+            .heart-border {
+                background: url('data:image/svg+xml;utf8,<svg fill="%23F8922D" height="32" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>');
+            }
 
-        .favorite-count.loading:after {
-            border-right-color: #f2f2f2;
-        }
+            /* While the page loads we show a grey heart icon to indicate that the functionality is not yet available. */
 
-        .favorite-count:after {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            width: 0;
-            height: 0;
-            border: 8px solid transparent;
-            border-right-color: #b60845;
-            border-left: 0;
-            margin-top: -8px;
-            margin-left: -8px;
-        }
+            .heart-loading,
+            .heart-loading[placeholder] {
+                background: url('data:image/svg+xml;utf8,<svg fill="%23fde6ce" height="32" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>');
+            }
 
-        /* A simple snackbar to show an error */
+            .favorite-container {
 
-        #favorite-failed-message {
-            display: flex;
-            justify-content: space-between;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-            width: 100%;
-            max-width: 450px;
-            background: #323232;
-            color: white;
-            padding: 1rem 1.5rem;
-        }
+            }
 
-        #favorite-failed-message div {
-            color: #64dd17;
-            margin: 0 1rem;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<!-- Global container with background styles. Gmail converts BODY to DIV so we lose properties like BGCOLOR. -->
+            .favorite-count {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 8px;
+                margin-left: 8px;
+                position: relative;
+                width: 48px;
+                background: #b60845;
+                border-radius: .4em;
+                color: white;
+            }
 
-<body class="background-color" style="padding: 0;background-color: #EAEDED;padding: 0px;margin: 0px;" bgcolor="#EAEDED">
-    <div style="padding: 0;background-color: #EAEDED;font-family: 'Benton Sans', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Helvetica, Tahoma, Arial, sans-serif;padding-top: 40px;padding-bottom: 40px;margin: 0px;"
-        class="background-color background" celpadding="0" cellspacing="0" border="0" bgcolor="#EAEDED">
+            .favorite-count.loading {
+                color: #ccc;
+                background: #f2f2f2;
+            }
+
+            .favorite-count.loading:after {
+                border-right-color: #f2f2f2;
+            }
+
+            .favorite-count:after {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 50%;
+                width: 0;
+                height: 0;
+                border: 8px solid transparent;
+                border-right-color: #b60845;
+                border-left: 0;
+                margin-top: -8px;
+                margin-left: -8px;
+            }
+
+            /* A simple snackbar to show an error */
+
+            #favorite-failed-message {
+                display: flex;
+                justify-content: space-between;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                width: 100%;
+                max-width: 450px;
+                background: #323232;
+                color: white;
+                padding: 1rem 1.5rem;
+            }
+
+            #favorite-failed-message div {
+                color: #64dd17;
+                margin: 0 1rem;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <!-- Global container with background styles. Gmail converts BODY to DIV so we lose properties like BGCOLOR. -->
+    <body class="background-color" style="padding: 0;background-color: #EAEDED;padding: 0px;margin: 0px;" bgcolor="#EAEDED">
+        <div style="padding: 0;background-color: #EAEDED;font-family: 'Benton Sans', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Helvetica, Tahoma, Arial, sans-serif;padding-top: 40px;padding-bottom: 40px;margin: 0px;" class="background-color background" celpadding="0" cellspacing="0" border="0" bgcolor="#EAEDED">
         <!--[if mso]>
             <table align="center" border="0" cellspacing="0" cellpadding="0" width="600" style="width:600px;" class="mso"  bgcolor="#EAEDED">
                 <tr>
                     <td align="center" valign="top" width="600" style="width:600px;" bgcolor="#EAEDED">
         <![endif]-->
 
-        <table style="padding: 0;border:0;border-collapse:collapse;border-spacing:0;margin-left: auto;margin-right: auto;max-width: 600px;width: 600px;background-color: #FFFFFF;"
-            class="principal" celpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" width="600">
+            <table style="padding: 0;border:0;border-collapse:collapse;border-spacing:0;margin-left: auto;margin-right: auto;max-width: 600px;width: 600px;background-color: #FFFFFF;" class="principal" celpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" width="600">
 
-            <tbody>
-                <tr>
+                <tbody><tr>
                     <!--[if mso]>
                         <td class="grid__col" height="4" style="line-height:1px; font-size:1px;" bgcolor="#F6682F" width="600">&nbsp;</td>
                     <![endif]-->
-                    <td>
-                        <div class="brand_bar" style="padding: 0;background: #f6682f; background: -moz-linear-gradient(left, #f6682f 0%, #ffb91d 100%); /* FF3.6-15 */background: -webkit-linear-gradient(left, #f6682f 0%,#ffb91d 100%); /* Chrome10-25,Safari5.1-6 */background: linear-gradient(to right, #f6682f 0%,#ffb91d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */height: 4px; width: 100%;"
-                            height="4" width="100%">
+                    <td style="padding: 0;">
+                        <div class="brand_bar" style="padding: 0;background: #f6682f; background: -moz-linear-gradient(left, #f6682f 0%, #ffb91d 100%); /* FF3.6-15 */background: -webkit-linear-gradient(left, #f6682f 0%,#ffb91d 100%); /* Chrome10-25,Safari5.1-6 */background: linear-gradient(to right, #f6682f 0%,#ffb91d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */height: 4px; width: 100%;" height="4" width="100%">
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td style="padding: 0;">
                         <!-- Header -->
-                        <table style="padding: 0; border:0;border-collapse:collapse;border-spacing:0;margin-left:32px;margin-right:32px;width:536px;"
-                            class="content" celpadding="0" cellspacing="0" border="0" width="536">
+                        <table style="padding: 0; border:0;border-collapse:collapse;border-spacing:0;margin-left:32px;margin-right:32px;width:536px;" class="content" celpadding="0" cellspacing="0" border="0" width="536">
                             <tbody>
                                 <tr>
-                                    <td style="text-align: left;" align="left">
+                                    <td style="padding: 0; text-align: left;" align="left">
                                         <h2 style="padding: 0;color: #45494E;margin: 24px 0px 0px 0px;" class="heading">
                                             <a style="text-decoration:none;" href=".com/?utm_source=eb_email&amp;utm_medium=email&amp;utm_campaign=utm_campaign&amp;utm_term=eb_logo">
-                                                <img style="border:0;height:20px;width:126px;" class="eb_logo" src="https://cdn.evbstatic.com/s3-s3/marketing/emails/images/logos/eb-wordmarkx2.png"
-                                                    alt="Eventbrite" width="126" height="20">
+                                                <img style="border:0;height:20px;width:126px;" class="eb_logo" src="https://cdn.evbstatic.com/s3-s3/marketing/emails/images/logos/eb-wordmarkx2.png" alt="Eventbrite" width="126" height="20">
                                             </a>
                                         </h2>
                                     </td>
@@ -439,11 +433,14 @@
                 <!-- Body -->
                 <tr>
                     <td class="row_section" style="
+                        padding: 0;
+
                         margin-left: auto;
                         margin-right: auto;
                     ">
-                        <table style="
+                            <table style="
                         padding: 0;
+
                         border:0;
                         border-collapse:collapse;
                         border-spacing:0;
@@ -451,12 +448,13 @@
                         margin-right:32px;
                         width:536px;
                      " class="content" cellspacing="0" cellpadding="0" width="536" bgcolor="">
-                            <tbody>
-                                <tr class="small_full_width" style="">
-                                    <td class="grid__col" style="
+                            <tbody><tr class="small_full_width" style="">
+                            <td class="grid__col" style="
+                            padding: 0;
+
                             text-align: left;
                         " align="left">
-                                        <h2 class="heading heading_epic" style="
+                        <h2 class="heading heading_epic" style="
                             font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
 
                             padding: 0;
@@ -468,22 +466,24 @@
                             margin-top: 20px;
                         ">
 
-                                            Your Weekly Event Guide
+                                        Your Weekly Event Guide
 
-                                        </h2>
-
-
-                                    </td>
-                                </tr>
+                        </h2>
 
 
-                                <tr class="small_full_width" style="">
-                                    <td class="grid__col" style="
+                            </td>
+                        </tr>
+
+
+                        <tr class="small_full_width" style="">
+                            <td class="grid__col" style="
+                            padding: 0;
+
                             text-align: left;
                         " align="left">
 
 
-                                        <p style="
+                        <p style="
                             font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
                             padding:0;
                             color:#666a73;
@@ -493,135 +493,143 @@
                             line-height:24px;
                         " class="text_body text_body_large">
 
-                                            Get up, get out! Check out these recommended events for you.
+                                    Get up, get out! Check out these recommended events for you.
 
-                                        </p>
+                        </p>
 
 
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
-                            </tbody>
+                        </tbody>
                         </table>
 
-                    </td>
-                </tr>
+                        </td>
+                        </tr>
 
 
-                <tr>
-                    <td>
+                        <tr><td>
 
-                        <!-- - - - - - - - - -TABS & CARROUSEL  - - - - - - - - -->
+<!-- - - - - - - - - -TABS & CARROUSEL  - - - - - - - - -->
 
-                        <amp-selector on="select:AMP.setState({selectedTab: event.targetOption})" [selected]="selectedTab" role="tablist" layout="container"
-                            class="ampTabContainer" selected="a">
+                    <amp-selector on="select:AMP.setState({selectedTab: event.targetOption})" [selected]="selectedTab" role="tablist" layout="container" class="ampTabContainer" selected="a">
 
-                            <div class="tabs">
-                                <div class="tabs-wrapper">
-                                    <div role="tab" class="tabButton" selected option="a">Events for you</div>
-                                    <div role="tab" class="tabButton" option="b">Weekend guide</div>
-                                    <div role="tab" class="tabButton" option="c">Your saved events</div>
-                                </div>
+                        <div class="tabs">
+                            <div class="tabs-wrapper">
+                                <div role="tab" class="tabButton" selected option="a">Events for you</div>
+                                <div role="tab" class="tabButton" option="b">Weekend guide</div>
+                                <div role="tab" class="tabButton" option="c">Your saved events</div>
                             </div>
+                        </div>
 
-                            <div>
-                                <div role="tabpanel" class="tabContent content-a" content="a">
-                                    <!-- Content a -->
-                                    <!-- - - - - - - - - - CONTENT - - - - - - - - -->
-                                    <!-- - - - - - - - - - START CARROUSEL  - - - - - - - - -->
-                                    <amp-carousel layout="fixed-height" type="slides" class="carouselPanel">
+                        <div>
+                            <div role="tabpanel" class="tabContent content-a" content="a">
+                                <!-- Content a -->
 
-                                        <div>
-                                            <div class="event-image">
-                                                <img src="https://img-dev.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F41229549%2F16989097%2F1%2Foriginal.jpg?h=300&w=600&rect=0%2C11%2C774%2C387&s=30953e50a8c2aa030f51f209d3563a98"
-                                                />
-                                            </div>
-                                            <div class="event-information">
-                                                <div class="event-date">
-                                                    <div class="month">APR</div>
-                                                    <div class="day">12</div>
-                                                </div>
-                                                <div class="event-details">
-                                                    <div class="name">Mastering a Powerful & Positive First Impression</div>
-                                                    <div class="organizer">by Divine Images Network, Inc.</div>
-                                                    <div class="location">Hughes Barney Investigations, Largo</div>
-                                                </div>
-                                                <div class="event-like">
-                                                    <div placeholder>
-                                                        <div class="favorite-container">
-                                                            <input id="h-1" type="submit" onclick="changeclass(1)" class="heart-loading" value="" aria-label="favorite placeholder">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+
+                        <!-- - - - - - - - - - CONTENT - - - - - - - - -->
+                    <!-- - - - - - - - - - START CARROUSEL  - - - - - - - - -->
+                                <amp-carousel layout="fixed-height" type="slides" class="carouselPanel">
+
+                                    <div>
+                                        <div class="event-image">
+                                            <img src="https://img-dev.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F41229549%2F16989097%2F1%2Foriginal.jpg?h=300&w=600&rect=0%2C11%2C774%2C387&s=30953e50a8c2aa030f51f209d3563a98"/>
                                         </div>
-                                        <div>
-                                            <div class="event-image">
-                                                <img src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F42508691%2F240516451780%2F1%2Foriginal.jpg?w=800&rect=0%2C274%2C960%2C480&s=65d181abad278564fde54acac9c1bc55"
-                                                />
+                                        <div class="event-information">
+                                            <div class="event-date">
+                                                <div class="month">APR</div>
+                                                <div class="day">12</div>
                                             </div>
-                                            <div class="event-information">
-                                                <div class="event-date">
-                                                    <div class="month">APR</div>
-                                                    <div class="day">20</div>
-                                                </div>
-                                                <div class="event-details">
-                                                    <div class="name">Vine_yasa Yoga at Bigsby’s Folly</div>
-                                                    <div class="organizer">by Bigsby’s Folly</div>
-                                                    <div class="location">Denver, CO</div>
-                                                </div>
+                                            <div class="event-details">
+                                                <div class="name">Mastering a Powerful & Positive First Impression</div>
+                                                <div class="organizer">by Divine Images Network, Inc.</div>
+                                                <div class="location">Hughes Barney Investigations, Largo</div>
                                             </div>
                                             <div class="event-like">
-                                                <div placeholder>
-                                                    <div class="favorite-container">
-                                                        <input id="h-2" type="submit" onclick="changeclass(2)" class="heart-loading" value="" aria-label="favorite placeholder">
+                                                   <div placeholder>
+                                                      <div class="favorite-container">
+                                                        <input  id="h-1" type="submit"
+                                                               onclick="changeclass(1)"
+                                                               class="heart-loading"
+                                                               value="" aria-label="favorite placeholder">
+                                                      </div>
                                                     </div>
-                                                </div>
                                             </div>
                                         </div>
-
-                                        <div>
-                                            <div class="event-image">
-                                                <img src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F41438557%2F148767302190%2F1%2Foriginal.jpg?w=800&rect=0%2C116%2C960%2C480&s=7d94f21325893c0c736eb45c94acdb92"
-                                                />
+                                    </div>
+                                    <div>
+                                        <div class="event-image">
+                                            <img src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F42508691%2F240516451780%2F1%2Foriginal.jpg?w=800&rect=0%2C274%2C960%2C480&s=65d181abad278564fde54acac9c1bc55"/>
+                                        </div>
+                                        <div class="event-information">
+                                            <div class="event-date">
+                                                <div class="month">APR</div>
+                                                <div class="day">20</div>
                                             </div>
-                                            <div class="event-information">
-                                                <div class="event-date">
-                                                    <div class="month">MAY</div>
-                                                    <div class="day">05</div>
-                                                </div>
-                                                <div class="event-details">
-                                                    <div class="name">R&B Live First Saturdays With Faycez U ...</div>
-                                                    <div class="organizer">by Echelon Entertainment</div>
-                                                    <div class="location">Centreville Road Herndon, VA 20171</div>
-                                                </div>
-                                            </div>
-                                            <div class="event-like">
-                                                <div placeholder>
-                                                    <div class="favorite-container">
-                                                        <input id="h-3" type="submit" onclick="changeclass(3)" class="heart-loading" value="" aria-label="favorite placeholder">
-                                                    </div>
-                                                </div>
+                                            <div class="event-details">
+                                                <div class="name">Vine_yasa Yoga at Bigsby’s Folly</div>
+                                                <div class="organizer">by Bigsby’s Folly</div>
+                                                <div class="location">Denver, CO</div>
                                             </div>
                                         </div>
+                                        <div class="event-like">
+                                            <div placeholder>
+                                                      <div class="favorite-container">
+                                                        <input  id="h-2" type="submit"
+                                                               onclick="changeclass(2)"
+                                                               class="heart-loading"
+                                                               value="" aria-label="favorite placeholder">
+                                                      </div>
+                                                    </div>
+                                        </div>
+                                    </div>
 
-                                    </amp-carousel>
+                                    <div>
+                                        <div class="event-image">
+                                            <img src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F41438557%2F148767302190%2F1%2Foriginal.jpg?w=800&rect=0%2C116%2C960%2C480&s=7d94f21325893c0c736eb45c94acdb92"/>
+                                        </div>
+                                        <div class="event-information">
+                                            <div class="event-date">
+                                                <div class="month">MAY</div>
+                                                <div class="day">05</div>
+                                            </div>
+                                            <div class="event-details">
+                                                <div class="name">R&B Live First Saturdays With Faycez U ...</div>
+                                                <div class="organizer">by Echelon Entertainment</div>
+                                                <div class="location">Centreville Road Herndon, VA 20171</div>
+                                            </div>
+                                        </div>
+                                        <div class="event-like">
+                                            <div placeholder>
+                                                      <div class="favorite-container">
+                                                        <input  id="h-3" type="submit"
+                                                               onclick="changeclass(3)"
+                                                               class="heart-loading"
+                                                               value="" aria-label="favorite placeholder">
+                                                      </div>
+                                                    </div>
+                                        </div>
+                                    </div>
+
+                                </amp-carousel>
 
 
-                                </div>
-                                <div role="tabpanel" class="tabContent content-b" content="b">
-                                    <!-- Content b -->
-                                </div>
-                                <div role="tabpanel" class="tabContent content-c" content="c">
-                                    <!-- Content c -->
-                                </div>
                             </div>
-                        </amp-selector>
-                        <!-- - - - - - - - - - END TABS & CARROUSEL  - - - - - - - - -->
+                            <div role="tabpanel" class="tabContent content-b" content="b">
+                                <!-- Content b -->
+                            </div>
+                            <div role="tabpanel" class="tabContent content-c" content="c">
+                                <!-- Content c -->
+                            </div>
+                        </div>
+                </amp-selector>
+                <!-- - - - - - - - - - END TABS & CARROUSEL  - - - - - - - - -->
                     </td>
                 </tr>
                 <tr>
                     <td class="row_section" style="
+                    padding: 0;
+
                     margin-left: auto;
                     margin-right: auto;
                 ">
@@ -636,31 +644,30 @@
                     width:536px;
                  " class="content" cellspacing="0" cellpadding="0" width="536" bgcolor="">
 
-                            <!--[if mso]>
+                    <!--[if mso]>
                         <td height="1" style="line-height:1px; font-size:1px;" bgcolor="#DEDEDE">&nbsp;</td>
                     <![endif]-->
 
-                            <tbody>
-                                <tr class="small_full_width">
-                                    <td class="grid__col" style="
+                <tbody><tr class="small_full_width" style="">
+                    <td class="grid__col" style="
+                    padding: 0;
+
                     text-align: left;
                 " align="left">
-                                        <div class="divider" style="background-color:#DEDEDE;
+                        <div class="divider" style="background-color:#DEDEDE;
                     width: 100%;
                     height: 1px;
                     margin: 15px auto 0px;
                 " height="1" width="100%" bgcolor="#DEDEDE">
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    </div></td>
+                </tr>
+                        </tbody></table>
                     </td>
                 </tr>
-                <!-- End Body -->
-                <tr>
-                    <td class="row_section" style="margin-left: auto;margin-right: auto;">
-                        <table style="
+                    <!-- End Body -->
+    <tr>
+        <td class="row_section" style="padding: 0;margin-left: auto;margin-right: auto;">
+            <table style="
         padding: 0;
 
         border:0;
@@ -671,15 +678,14 @@
         width:536px;
      " class="content" cellspacing="0" cellpadding="0" width="536" bgcolor="">
 
-                            <!--[if (mso)|(ie)]>
+    <!--[if (mso)|(ie)]>
         <tr>
             <td class="grid__col" height="32" style="line-height:1px; font-size:1px;" width="600">&nbsp;</td>
         </td>
     <![endif]-->
 
-                            <tbody>
-                                <tr class="footer__info align-center" style="">
-                                    <td class="grid__col" style="
+    <tbody><tr class="footer__info align-center" style="">
+        <td class="grid__col" style="
         padding: 0;
 
     font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
@@ -694,22 +700,21 @@
 
 
 
-                                        <div class="top-row footer-row__text" style="
+    <div class="top-row footer-row__text" style="
     padding: 0;
 ">
 
 
 
-                                            <a style="" href="https://www..com" class="">
-                                                <!--[if !mso]><!-- -->
-                                                <div style="
+            <a style="" href="https://www..com" class="">
+            <!--[if !mso]><!-- -->
+                <div style="
         padding: 0;
     ">
-                                                    <!--<![endif]-->
+            <!--<![endif]-->
 
 
-                                                    <img src="https://cdn.evbstatic.com/s3-build/perm_001/06fd00/django/images/email/newsletters/E.png" class="footer-eb-logo__image"
-                                                        style="
+                <img src="https://cdn.evbstatic.com/s3-build/perm_001/06fd00/django/images/email/newsletters/E.png" class="footer-eb-logo__image" style="
     height:56px;
     max-width:100%;
     padding:32px 0 16px;
@@ -717,16 +722,16 @@
 " alt="Eventbrite" scale="0" height="56" width="56">
 
 
-                                                    <!--[if !mso]><!-- -->
-                                                </div>
-                                                <!--<![endif]-->
-                                            </a>
+            <!--[if !mso]><!-- -->
+                </div>
+            <!--<![endif]-->
+            </a>
 
 
-                                        </div>
+    </div>
 
 
-                                        <div class="top-row heading_find-next-experience" style="
+            <div class="top-row heading_find-next-experience" style="
     font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
 
     padding:0;
@@ -735,28 +740,27 @@
     height:25px;
     line-height:25px;
 " height="25">
-                                            Find your next experience on Eventbrite
-                                        </div>
+                Find your next experience on Eventbrite
+            </div>
 
-                                    </td>
-                                </tr>
-
-
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
+        </td>
+    </tr>
 
 
+            </tbody></table>
+        </td>
+    </tr>
 
-                <tr>
-                    <td class="row_section" style="
+
+
+    <tr>
+        <td class="row_section" style="
         padding: 0;
 
         margin-left: auto;
         margin-right: auto;
     ">
-                        <table style="
+            <table style="
         padding: 0;
 
         border:0;
@@ -768,16 +772,15 @@
      " class="content" cellspacing="0" cellpadding="0" width="536" bgcolor="">
 
 
-                            <tbody>
-                                <tr class="small_full_width" style="">
-                                    <td class="grid__col" style="
+    <tbody><tr class="small_full_width" style="">
+        <td class="grid__col" style="
         padding: 0;
 
     text-align: left;
 " align="left">
 
 
-                                        <!--[if (mso)|(ie)]>
+    <!--[if (mso)|(ie)]>
     <table align="center" border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td width="100%" style="padding-bottom:32px; padding-top:32px;">
@@ -791,15 +794,15 @@
         </tr>
     </table>
     <![endif]-->
-                                        <!--[if !((mso)|(ie))]><!-- -->
-                                        <div style="
+    <!--[if !((mso)|(ie))]><!-- -->
+    <div style="
         font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
 
         padding: 0;
 
         text-align: center;
     " align="center">
-                                            <a href=".com/eventbriteapp?app_cta_src=email_footer" target="_blank" style="background-color:#FFFFFF;
+        <a href=".com/eventbriteapp?app_cta_src=email_footer" target="_blank" style="background-color:#FFFFFF;
         display: inline-block;
         line-height: 20px;
         font-weight: 500;
@@ -814,32 +817,31 @@
     margin-bottom: 32px;
     margin-top: 30px;
 " class="btn call_to_action" align="center" bgcolor="#FFFFFF">
-                                                Download the app
-                                            </a>
-                                        </div>
-                                        <!--<![endif]-->
+            Download the app
+        </a>
+    </div>
+    <!--<![endif]-->
 
 
-                                    </td>
-                                </tr>
-
-
-
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
+        </td>
+    </tr>
 
 
 
-                <tr>
-                    <td class="row_section" style="
+            </tbody></table>
+        </td>
+    </tr>
+
+
+
+    <tr>
+        <td class="row_section" style="
         padding: 0;
 
         margin-left: auto;
         margin-right: auto;
     ">
-                        <table style="
+            <table style="
         padding: 0;
 
         background-color: #EFF2F5;
@@ -852,9 +854,8 @@
      " class="footer-content bottom-section" cellspacing="0" cellpadding="0" width="600" bgcolor="#EFF2F5">
 
 
-                            <tbody>
-                                <tr class="footer__info align-center" style="">
-                                    <td class="grid__col" style="
+    <tbody><tr class="footer__info align-center" style="">
+        <td class="grid__col" style="
         padding: 0;
 
     font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
@@ -867,13 +868,13 @@
     padding: 0px 32px;
 " align="center">
 
-                                        <!--[if (mso)|(ie)]>
+        <!--[if (mso)|(ie)]>
         <table align="center" border="0" cellspacing="0" cellpadding="0" width="100%" style="text-align:center; width:100%;">
             <tr>
                 <td style="text-align:center; padding:16px 6px; border:0px;font-size: 14px;line-height:18px;font-weight: 200;">
         <![endif]-->
 
-                                        <div class="top-row social__title" style="
+    <div class="top-row social__title" style="
     font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
 
     font-size: 14px;
@@ -881,11 +882,11 @@
     padding-top: 24px;
 ">
 
-                                            Let’s be friends
+                Let’s be friends
 
-                                        </div>
+    </div>
 
-                                        <!--[if (mso)|(ie)]>
+        <!--[if (mso)|(ie)]>
                 </td>
             </tr>
         </table>
@@ -896,7 +897,7 @@
                         <tr>
                             <td style="padding:16px 6px; border:0px; width:40px; height:40px;">
         <![endif]-->
-                                        <div class="social-logo-container column-left" style="
+        <div class="social-logo-container column-left" style="
     padding:0;
     display:inline-block;
     height:auto;
@@ -904,16 +905,15 @@
 
     text-align: right;
 " height="auto" align="right">
-                                            <a href="http://www.twitter.com/Eventbrite">
-                                                <img src="https://cdn.evbstatic.com/s3-build/perm_001/6df3bc/django/images/email/newsletters/Twitter.png" class="footer-social-logo__image"
-                                                    style="
+            <a href="http://www.twitter.com/Eventbrite">
+                <img src="https://cdn.evbstatic.com/s3-build/perm_001/6df3bc/django/images/email/newsletters/Twitter.png" class="footer-social-logo__image" style="
     height:40px;
     padding:16px 3px 0;
     width:40px;
 " height="40" width="40" alt="Twitter" title="Twitter" border="0">
-                                            </a>
-                                        </div>
-                                        <!--[if (mso)|(ie)]>
+            </a>
+        </div>
+        <!--[if (mso)|(ie)]>
                             </td>
                         </tr>
                     </table>
@@ -923,7 +923,7 @@
                         <tr>
                             <td style="text-align:center; padding:16px 6px; border:0px; width:40px; height:40px;">
         <![endif]-->
-                                        <div class="social-logo-container column-center" style="
+        <div class="social-logo-container column-center" style="
     padding:0;
     display:inline-block;
     height:auto;
@@ -931,16 +931,15 @@
 
     text-align: center;
 " height="auto" align="center">
-                                            <a href="https://www.facebook.com/Eventbrite" target="_blank" aria-label="Eventbrite Facebook">
-                                                <img src="https://cdn.evbstatic.com/s3-build/perm_001/88f748/django/images/email/newsletters/Facebook.png" class="footer-social-logo__image"
-                                                    style="
+            <a href="https://www.facebook.com/Eventbrite" target="_blank" aria-label="Eventbrite Facebook">
+                <img src="https://cdn.evbstatic.com/s3-build/perm_001/88f748/django/images/email/newsletters/Facebook.png" class="footer-social-logo__image" style="
     height:40px;
     padding:16px 3px 0;
     width:40px;
 " height="40" width="40">
-                                            </a>
-                                        </div>
-                                        <!--[if (mso)|(ie)]>
+            </a>
+        </div>
+        <!--[if (mso)|(ie)]>
                             </td>
                         </tr>
                     </table>
@@ -951,7 +950,7 @@
                             <td style="text-align:right; padding:16px 6px; border:0px; width:40px; height:40px;">
         <![endif]-->
 
-                                        <div class="social-logo-container column-right" style="
+        <div class="social-logo-container column-right" style="
     padding:0;
     display:inline-block;
     height:auto;
@@ -959,16 +958,15 @@
 
     text-align: left;
 " height="auto" align="left">
-                                            <a href="https://www.instagram.com/eventbrite/" target="_blank" aria-label="Eventbrite Instagram">
-                                                <img src="https://cdn.evbstatic.com/s3-build/perm_001/371295/django/images/email/newsletters/Instagram.png" class="footer-social-logo__image"
-                                                    style="
+            <a href="https://www.instagram.com/eventbrite/" target="_blank" aria-label="Eventbrite Instagram">
+                <img src="https://cdn.evbstatic.com/s3-build/perm_001/371295/django/images/email/newsletters/Instagram.png" class="footer-social-logo__image" style="
     height:40px;
     padding:16px 3px 0;
     width:40px;
 " height="40" width="40">
-                                            </a>
-                                        </div>
-                                        <!--[if (mso)|(ie)]>
+            </a>
+        </div>
+        <!--[if (mso)|(ie)]>
                             </td>
                         </tr>
                     </table>
@@ -977,25 +975,24 @@
         </table>
         <![endif]-->
 
-                                    </td>
-                                </tr>
+        </td>
+    </tr>
 
 
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
+            </tbody></table>
+        </td>
+    </tr>
 
 
 
-                <tr>
-                    <td class="row_section" style="
+    <tr>
+        <td class="row_section" style="
         padding: 0;
 
         margin-left: auto;
         margin-right: auto;
     ">
-                        <table style="
+            <table style="
         padding: 0;
 
         background-color: #EFF2F5;
@@ -1007,7 +1004,7 @@
         color:#222!important;
      " class="footer-content bottom-section" cellspacing="0" cellpadding="0" width="600" bgcolor="#EFF2F5">
 
-                            <!--[if mso]>
+    <!--[if mso]>
     <tr>
         <td width="100%">
             <table align="center" border="0" cellspacing="0" cellpadding="0" width="70%" style="width:70%;">
@@ -1019,39 +1016,36 @@
     </tr>
     <![endif]-->
 
-                            <tbody>
-                                <tr class="small_full_width" style="">
-                                    <td class="grid__col" style="
+    <tbody><tr class="small_full_width" style="">
+        <td class="grid__col" style="
         padding: 0;
      padding:0 32px;" align="center">
 
-                                        <div class="divider medium-width" style="background-color:#dedede;
+        <div class="divider medium-width" style="background-color:#dedede;
     padding: 0px 32px;
     height:1px;
     margin:15px auto 0;
     width:70%;
 " bgcolor="#dedede" height="1" width="70%">
 
-                                        </div>
-                                    </td>
-                                </tr>
+        </div></td>
+    </tr>
 
 
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
+            </tbody></table>
+        </td>
+    </tr>
 
 
 
-                <tr>
-                    <td class="row_section" style="
+    <tr>
+        <td class="row_section" style="
         padding: 0;
 
         margin-left: auto;
         margin-right: auto;
     ">
-                        <table style="
+            <table style="
         padding: 0;
 
         background-color: #EFF2F5;
@@ -1065,9 +1059,8 @@
 
 
 
-                            <tbody>
-                                <tr class="footer__info align-center" style="">
-                                    <td class="grid__col" style="
+    <tbody><tr class="footer__info align-center" style="">
+        <td class="grid__col" style="
         padding: 0;
 
     font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
@@ -1080,13 +1073,13 @@
     padding: 0px 32px;
 " align="center">
 
-                                        <!--[if (mso)|(ie)]>
+        <!--[if (mso)|(ie)]>
         <table align="center" border="0" cellspacing="0" cellpadding="0" width="100%" style="text-align:center; width:100%;">
             <tr>
                 <td style="text-align:center; padding:16px 6px; border:0px;font-size: 12px;line-height: 18px;font-weight: 200;">
         <![endif]-->
 
-                                        <div class="top-row footer-row__text" style="
+    <div class="top-row footer-row__text" style="
     font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
 
     padding:0;
@@ -1095,11 +1088,11 @@
     padding-top: 24px;
 ">
 
-                                            Brought to you by the fine folks at
+            Brought to you by the fine folks at
 
-                                        </div>
+    </div>
 
-                                        <!--[if (mso)|(ie)]>
+        <!--[if (mso)|(ie)]>
                 </td>
             </tr>
             <tr>
@@ -1107,7 +1100,7 @@
         <![endif]-->
 
 
-                                        <div class="footer-row__text" style="
+    <div class="footer-row__text" style="
     font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
 
     padding:0;
@@ -1116,39 +1109,38 @@
 
 
 
-                                            <a style="" href="https://www..com" class="">
-                                                <!--[if !mso]><!-- -->
-                                                <div style="
+            <a style="" href="https://www..com" class="">
+            <!--[if !mso]><!-- -->
+                <div style="
         padding: 0;
     ">
-                                                    <!--<![endif]-->
+            <!--<![endif]-->
 
 
-                                                    <img src="https://cdn.evbstatic.com/s3-build/perm_001/bc9462/django/images/email/newsletters/logo-footer-eventbrite.png"
-                                                        class="footer-logo__image" style="
+            <img src="https://cdn.evbstatic.com/s3-build/perm_001/bc9462/django/images/email/newsletters/logo-footer-eventbrite.png" class="footer-logo__image" style="
     height: 27px;
     padding: 8px 0;
     width: 142px;
 " height="27" width="142" alt="Eventbrite">
 
 
-                                                    <!--[if !mso]><!-- -->
-                                                </div>
-                                                <!--<![endif]-->
-                                            </a>
+            <!--[if !mso]><!-- -->
+                </div>
+            <!--<![endif]-->
+            </a>
 
 
-                                        </div>
+    </div>
 
 
-                                        <!--[if (mso)|(ie)]>
+        <!--[if (mso)|(ie)]>
                 </td>
             </tr>
             <tr>
                 <td style="text-align:center; padding-bottom: 6px; border:0px;font-size: 12px;line-height: 18px;font-weight: 200;">
         <![endif]-->
 
-                                        <div class="footer-row__text" style="
+    <div class="footer-row__text" style="
     font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
 
     padding:0;
@@ -1157,22 +1149,22 @@
 
 
 
-                                            <span>This email was sent to
+            <span>This email was sent to
 
-                                                <a style="color: #007F8C;" href="mailto:test@evbqa.com" target="_blank" class="">test@evbqa.com</a>
-                                            </span>
+        <a style="color: #007F8C;" href="mailto:test@evbqa.com" target="_blank" class="">test@evbqa.com</a>
+</span>
 
 
-                                        </div>
+    </div>
 
-                                        <!--[if (mso)|(ie)]>
+        <!--[if (mso)|(ie)]>
                 </td>
             </tr>
             <tr>
                 <td style="text-align:center; padding-bottom:6px; border: 0px;font-size: 12px;line-height: 18px;font-weight: 200;">
         <![endif]-->
 
-                                        <div class="footer-row__text" style="
+    <div class="footer-row__text" style="
     font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
 
     padding:0;
@@ -1181,19 +1173,19 @@
 
 
 
-                                            <a style="color: #007F8C;" href="https://www..com" target="_blank" class="">Eventbrite</a>
-                                            | 155 5th St, 7th Floor | San Francisco, CA 94103
+        <a style="color: #007F8C;" href="https://www..com" target="_blank" class="">Eventbrite</a>
+  | 155 5th St, 7th Floor | San Francisco, CA 94103
 
-                                        </div>
+    </div>
 
-                                        <!--[if (mso)|(ie)]>
+        <!--[if (mso)|(ie)]>
                 </td>
             </tr>
             <tr>
                 <td style="text-align:center; padding-bottom:6px; border:0px;font-size: 12px;line-height:18px;font-weight: 200;">
         <![endif]-->
 
-                                        <div class="footer-row__text last_row" style="
+    <div class="footer-row__text last_row" style="
     font-family:'Benton Sans',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Helvetica,Tahoma,Arial,sans-serif;
 
     padding:0;
@@ -1202,58 +1194,55 @@
     padding-bottom: 24px;
 ">
 
-                                            © 2018 Eventbrite. All rights reserved.
+            © 2018 Eventbrite. All rights reserved.
 
-                                        </div>
+    </div>
 
-                                        <!--[if (mso)|(ie)]>
+        <!--[if (mso)|(ie)]>
                 </td>
             </tr>
         </table>
         <![endif]-->
 
-                                    </td>
-                                </tr>
+        </td>
+    </tr>
 
 
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            </tbody></table>
+        </td>
+    </tr>
+            </tbody></table>
 
-        <!--[if mso]>
+            <!--[if mso]>
                         </td>
                     </tr>
                 </table>
             <![endif]-->
-    </div>
+        </div>
 </body>
-
 </html>
 
 <script>
-    function changeclass(number) {
-        switch (number) {
-            case 1:
-                var heart = document.getElementById("h-1");
-                break;
-            case 2:
-                var heart = document.getElementById("h-2");
-                break;
-            case 3:
-                var heart = document.getElementById("h-3");
-                break;
-            default:
-                var heart = document.getElementById("h-0");
-        }
+function changeclass(number) {
+switch(number) {
+    case 1:
+        var heart = document.getElementById("h-1");
+        break;
+    case 2:
+        var heart = document.getElementById("h-2");
+        break;
+    case 3:
+        var heart = document.getElementById("h-3");
+        break;
+    default:
+        var heart = document.getElementById("h-0");
+}
 
-        if (heart.className == 'heart-loading') {
-            heart.className = "heart-fill"
-        } else {
-            heart.className = "heart-loading"
-        }
-
+    if (heart.className == 'heart-loading') {
+       heart.className="heart-fill"
+    } else {
+        heart.className="heart-loading"
     }
+
+}
 </script>
