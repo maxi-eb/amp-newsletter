@@ -1,11 +1,384 @@
-<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<!doctype html>
+<html ⚡4email>
+    <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
-
+        <!-- AMP -->
+        <script async src="https://cdn.ampproject.org/v0.js"></script>
+        <!-- #### Setup -->
+        <!-- Import `amp-selector` component in the header which we'll use to implement the tab switching. -->
+        <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+        <!-- Import `amp-carousel` component in the header which we'll use as a sample tab content -->
+        <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+        <!-- We use the `amp-list` component to dynamically render the initial state of the favorite button. -->
+        <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
+        <!-- The mustache component is required by `amp-list`.  -->
+        <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.1.js"></script>
+        <!-- We need `amp-form` to submit the favorite request.  -->
+        <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+        <!-- `amp-bind` enables us to dynamically change the button state when we submit the form.  -->
+        <!-- Import `amp-bind` component in the header which we'll use to switch tabs via buttons -->
+        <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+        <!-- END AMP -->
         <!-- Turn off iOS phone number autodetect -->
         <meta name="format-detection" content="telephone=no">
         <meta name="format-detection" content="address=no">
         <link rel="stylesheet" type="text/css" href="styles.css">
+        <style amp-custom>
+            .ampTabContainer {
+                padding-top: 0px;
+                padding-bottom: 0px;
+            }
+        
+            .tabButton[selected] {
+                outline: none !important;
+                border-bottom: 2px solid #f6682f;
+                color: #f6682f !important;
+            }
+        
+            .tabButton:focus {
+                outline: none !important;
+            }
+        
+            .tabButton {
+                font-weight: 500;
+                list-style: none;
+                flex-grow: 1;
+                text-align: center;
+                cursor: pointer;
+                border-color: transparent;
+                background: #FFF;
+                color: #666A73;
+                fill: #FFFFFF;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                box-sizing: border-box;
+                text-align: center;
+                text-decoration: none;
+                line-height: 20px;
+                letter-spacing: 0.2px;
+                font-size: 16px;
+                margin: 10px 0px;
+                display: inline-block;
+            }
+        
+            .tabButton:hover {
+                color: #000;
+            }
+        
+            .tabContent {
+                display: none;
+                width: 100%;
+                order: 1;
+                /* must be greater than the order of the tab buttons to flex to the next line */
+                padding: 10px 0px;
+            }
+        
+            .ampTabContainer[selected="a"] .tabContent[content="a"] {
+                display: block;
+            }
+        
+            .ampTabContainer[selected="b"] .tabContent[content="b"] {
+                display: block;
+            }
+        
+            .ampTabContainer[selected="c"] .tabContent[content="c"] {
+                display: block;
+            }
+        
+            /* For example below (not required) */
+        
+            .itemCustom {
+                border: 1px solid #000;
+                height: 280px;
+                width: 380px;
+                margin: 10px;
+                text-align: center;
+                padding-top: 140px;
+            }
+        
+            amp-selector {
+                padding: 0 1rem;
+                margin: 0 1rem;
+            }
+        
+            .tabs-wrapper {
+                display: flex;
+                flex-wrap: wrap;
+                width: 100%;
+            }
+        
+            .tabContent {
+                border: 0px solid transparent;
+                display: none;
+                width: 100%;
+                order: 1;
+                /* must be greater than the order of the tab buttons to flex to the next line */
+            }
+        
+            /* For example below (not required) */
+        
+            .itemCustom {
+                border: 0px solid transparent;
+        
+                height: 280px;
+                width: 380px;
+                margin: 10px;
+                text-align: center;
+                padding-top: 140px;
+            }
+        
+            .carouselPanel {
+                width: 536px;
+            }
+        
+            .event-image img {
+                width: 100%;
+            }
+        
+            .i-amphtml-slides-container {
+                position: relative !important;
+            }
+        
+            .event-date,
+            .event-details {
+                padding: 10px;
+                float: left;
+            }
+        
+            .event-details .name {
+                font-weight: 300;
+            }
+        
+            .event-details {
+                width: 350px;
+            }
+        
+            .event-date {
+                width: 50px;
+                text-align: center;
+            }
+        
+            .event-date .month {
+                color: #f6682f;
+                font-weight: normal;
+            }
+        
+            .event-date .day {
+                font-weight: normal;
+            }
+        
+            .organizer {
+                font-size: 12px;
+                font-weight: 200;
+            }
+        
+            .location {
+                font-weight: 200;
+            }
+        
+            @media all and (max-width: 480px) {
+                .tabs {
+                    display: block;
+                    width: 100%;
+                    overflow-x: scroll;
+                    overflow-y: hidden;
+                    white-space: nowrap;
+                }
+        
+                .tabs-wrapper {
+                    width: 0px;
+                    display: block;
+                }
+        
+                .tabButton {
+                    display: inline-block;
+                    padding: 20px;
+                    margin: 0px;
+                }
+                .ampTabContainer {
+                    width: 100%;
+                    margin: 0 !important;
+                }
+                amp-selector {
+                    padding: 0;
+                    margin: 0 !important;
+                }
+                .carouselPanel {
+                    width: 100%;
+                }
+                .event-date,
+                .event-details {
+                    padding: 5px;
+                }
+                .event-date {
+                    width: 15%;
+                }
+                .event-details {
+                    width: 60%;
+                }
+        
+            }
+        </style>
+        <style amp-boilerplate>
+            body {
+                -webkit-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+                -moz-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+                -ms-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+                animation: -amp-start 8s steps(1, end) 0s 1 normal both
+            }
+        
+            @-webkit-keyframes -amp-start {
+                from {
+                    visibility: hidden
+                }
+                to {
+                    visibility: visible
+                }
+            }
+        
+            @-moz-keyframes -amp-start {
+                from {
+                    visibility: hidden
+                }
+                to {
+                    visibility: visible
+                }
+            }
+        
+            @-ms-keyframes -amp-start {
+                from {
+                    visibility: hidden
+                }
+                to {
+                    visibility: visible
+                }
+            }
+        
+            @-o-keyframes -amp-start {
+                from {
+                    visibility: hidden
+                }
+                to {
+                    visibility: visible
+                }
+            }
+        
+            @keyframes -amp-start {
+                from {
+                    visibility: hidden
+                }
+                to {
+                    visibility: visible
+                }
+            }
+        </style>
+        <noscript>
+            <style amp-boilerplate>
+                body {
+                    -webkit-animation: none;
+                    -moz-animation: none;
+                    -ms-animation: none;
+                    animation: none
+                }
+            </style>
+        </noscript>
+        <style amp-custom>
+            /* some basic button styling */
+        
+            input[type=submit] {
+                width: 48px;
+                height: 48px;
+                cursor: pointer;
+                border: none;
+                margin: 4px;
+                transition: background 300ms ease-in-out;
+            }
+        
+            amp-list {
+                margin: 1rem;
+            }
+        
+            .heart-fill {
+                background: url('data:image/svg+xml;utf8,<svg fill="%23000000" height="48" viewBox="0 0 24 24" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+            }
+        
+            .heart-border {
+                background: url('data:image/svg+xml;utf8,<svg fill="%23000000" height="48" viewBox="0 0 24 24" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>');
+            }
+        
+            /* While the page loads we show a grey heart icon to indicate that the functionality is not yet available. */
+        
+            .heart-loading,
+            .heart-loading[placeholder] {
+                background: url('data:image/svg+xml;utf8,<svg fill="%23cccccc" height="48" viewBox="0 0 24 24" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>');
+            }
+        
+            .favorite-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        
+            .favorite-count {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 8px;
+                margin-left: 8px;
+                position: relative;
+                width: 48px;
+                background: #b60845;
+                border-radius: .4em;
+                color: white;
+            }
+        
+            .favorite-count.loading {
+                color: #ccc;
+                background: #f2f2f2;
+            }
+        
+            .favorite-count.loading:after {
+                border-right-color: #f2f2f2;
+            }
+        
+            .favorite-count:after {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 50%;
+                width: 0;
+                height: 0;
+                border: 8px solid transparent;
+                border-right-color: #b60845;
+                border-left: 0;
+                margin-top: -8px;
+                margin-left: -8px;
+            }
+        
+            /* A simple snackbar to show an error */
+        
+            #favorite-failed-message {
+                display: flex;
+                justify-content: space-between;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                width: 100%;
+                max-width: 450px;
+                background: #323232;
+                color: white;
+                padding: 1rem 1.5rem;
+            }
+        
+            #favorite-failed-message div {
+                color: #64dd17;
+                margin: 0 1rem;
+                cursor: pointer;
+            }
+        </style>
     </head>
     <!-- Global container with background styles. Gmail converts BODY to DIV so we lose properties like BGCOLOR. -->
     <body class="background-color" style="padding: 0;background-color: #EAEDED;padding: 0px;margin: 0px;" bgcolor="#EAEDED">
@@ -46,196 +419,6 @@
                     </td>
                 </tr>
                 <!-- Body -->
-                
-                <style amp-custom>
-                    .ampTabContainer {
-                        padding-top: 0px; 
-                        padding-bottom: 0px;
-                    }
-
-                    .tabButton[selected] {
-                        outline: none !important;
-                        border-bottom: 2px solid #f6682f;
-                        color: #f6682f !important;
-                    }
-
-                    .tabButton:focus {
-                        outline: none !important;
-                    }
-
-                    .tabButton {
-                        font-weight:500;
-                        list-style: none;
-                        flex-grow: 1;
-                        text-align: center;
-                        cursor: pointer;
-                        border-color: transparent;
-                        background: #FFF;
-                        color: #666A73;
-                        fill: #FFFFFF;
-                        padding-top: 10px;
-                        padding-bottom: 10px;
-                        box-sizing: border-box;
-                        text-align: center;
-                        text-decoration: none;
-                        line-height: 20px;
-                        letter-spacing: 0.2px;
-                        font-size: 16px;
-                        margin: 10px 0px;
-                        display: inline-block;
-                    }
-
-                    .tabButton:hover {
-                        color: #000;
-                    }
-
-                    .tabContent {
-                        display: none;
-                        width: 100%;
-                        order: 1; /* must be greater than the order of the tab buttons to flex to the next line */
-                        padding: 10px 0px;
-                    }
-
-                    .ampTabContainer[selected="a"] .tabContent[content="a"] {
-                        display: block;
-                    }
-
-                    .ampTabContainer[selected="b"] .tabContent[content="b"] {
-                        display: block;
-                    }
-
-                    .ampTabContainer[selected="c"] .tabContent[content="c"] {
-                        display: block;
-                    }
-
-                    /* For example below (not required) */
-                    .itemCustom {
-                        border: 1px solid #000;
-                        height: 280px;
-                        width: 380px;
-                        margin: 10px;
-                        text-align: center;
-                        padding-top: 140px;
-                    }
-                    amp-selector {
-                      padding: 0 1rem;
-                      margin: 0 1rem;
-                    }
-                    .tabs-wrapper {
-                        display: flex;
-                        flex-wrap: wrap;
-                        width: 100%;
-                    }
-
-                    .tabContent {
-                        border: 0px solid transparent;
-                        display: none;
-                        width: 100%;
-                        order: 1; /* must be greater than the order of the tab buttons to flex to the next line */
-
-                    }
-
-                    /* For example below (not required) */
-                    .itemCustom {
-                        border: 0px solid transparent;
-
-                        height: 280px;
-                        width: 380px;
-                        margin: 10px;
-                        text-align: center;
-                        padding-top: 140px;
-                    }
-
-                    .carouselPanel {
-                        width: 536px;
-                    }
-
-                    .event-image img {
-                        width: 100%;
-                    }
-
-                    .i-amphtml-slides-container {
-                        position: relative !important;
-                    }
-                    .event-date, .event-details {
-                        padding: 10px;
-                        float:left;
-                    }
-
-                    .event-details .name {
-                        font-weight: 300;
-                    }
-
-                    .event-details {
-                        width: 350px;
-                    }
-
-                    .event-date {
-                        width: 50px;
-                        text-align: center;
-                    }
-
-                    .event-date .month {
-                        color: #f6682f;
-                        font-weight: normal;
-                    }
-
-                    .event-date .day {
-                        font-weight: normal;
-                    }
-
-                    .organizer {
-                        font-size: 12px;
-                        font-weight: 200;
-                    }
-
-                    .location {
-                        font-weight: 200;
-                    }
-
-                    @media all and (max-width: 480px) {
-                        .tabs {
-                            display: block;
-                            width: 100%;
-                            overflow-x: scroll;
-                            overflow-y: hidden;
-                            white-space: nowrap;
-                        }
-
-                        .tabs-wrapper {
-                            width: 0px;
-                            display: block;
-                        }
-
-                        .tabButton {
-                            display: inline-block;
-                            padding: 20px;
-                            margin: 0px;
-                        }
-                        .ampTabContainer {
-                            width: 100%;
-                            margin: 0 !important;
-                        }
-                        amp-selector {
-                          padding: 0;
-                          margin: 0 !important;
-                        }
-                        .carouselPanel {
-                            width: 100%;
-                        }
-                        .event-date, .event-details {
-                            padding: 5px;
-                        }
-                        .event-date {
-                            width: 15%;
-                        }
-                        .event-details {
-                            width: 60%;
-                        }
-                        
-                    }
-                </style>
-
                 <tr>
                     <td class="row_section" style="
                         padding: 0;
@@ -351,6 +534,19 @@
                                                 <div class="location">Hughes Barney Investigations, Largo</div>
                                             </div>
                                             <div class="event-like">
+                                                <amp-state id="favorite01" src="/favorite">
+                                                </amp-state>
+                                                <form method="post" action-xhr="/favorite" target="_top" on="submit:AMP.setState({favorite01: !favorite01}),favorite-failed-message.hide; 
+                                                                                                    submit-error:AMP.setState({favorite01: !favorite01}),favorite-failed-message.show">
+                                                    <amp-list width="56" height="56" credentials="include" items="." single-item src="/favorite">
+                                                        <template type="amp-mustache">
+                                                            <input type="submit" [class]="favorite01 ? 'heart-fill' : 'heart-border'" value="" aria-label="Favorite Toggle">
+                                                        </template>
+                                                        <div placeholder>
+                                                            <input type="submit" disabled class="heart-loading" value="" aria-label="favorite placeholder">
+                                                        </div>
+                                                    </amp-list>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -370,6 +566,19 @@
                                             </div>
                                         </div>
                                         <div class="event-like">
+                                            <amp-state id="favorite" credentials="include" src="/favorite">
+                                            </amp-state>
+                                            <form method="post" action-xhr="/favorite" target="_top" on="submit:AMP.setState({favorite: !favorite}),favorite-failed-message.hide; 
+                                                    submit-error:AMP.setState({favorite: !favorite}),favorite-failed-message.show">
+                                                <amp-list width="56" height="56" credentials="include" items="." single-item src="/favorite">
+                                                    <template type="amp-mustache">
+                                                        <input type="submit" [class]="favorite ? 'heart-fill' : 'heart-border'" value="" aria-label="Favorite Toggle">
+                                                    </template>
+                                                    <div placeholder>
+                                                        <input type="submit" disabled class="heart-loading" value="" aria-label="favorite placeholder">
+                                                    </div>
+                                                </amp-list>
+                                            </form>
                                         </div>
                                     </div>
 
@@ -389,6 +598,19 @@
                                             </div>
                                         </div>
                                         <div class="event-like">
+                                            <amp-state id="favorite" credentials="include" src="/favorite">
+                                            </amp-state>
+                                            <form method="post" action-xhr="/favorite" target="_top" on="submit:AMP.setState({favorite: !favorite}),favorite-failed-message.hide; 
+                                                                                                submit-error:AMP.setState({favorite: !favorite}),favorite-failed-message.show">
+                                                <amp-list width="56" height="56" credentials="include" items="." single-item src="/favorite">
+                                                    <template type="amp-mustache">
+                                                        <input type="submit" [class]="favorite ? 'heart-fill' : 'heart-border'" value="" aria-label="Favorite Toggle">
+                                                    </template>
+                                                    <div placeholder>
+                                                        <input type="submit" disabled class="heart-loading" value="" aria-label="favorite placeholder">
+                                                    </div>
+                                                </amp-list>
+                                            </form>
                                         </div>
                                     </div>
 
@@ -1002,14 +1224,4 @@
         </div>
 </body>
 </html>
- <!-- AMP -->
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <!-- #### Setup -->
-    <!-- Import `amp-selector` component in the header which we'll use to implement the tab switching. -->
-    <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
-    <!-- Import `amp-carousel` component in the header which we'll use as a sample tab content -->
-    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
-    <!-- Import `amp-bind` component in the header which we'll use to switch tabs via buttons -->
-    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
-    <!-- There's just a bit of css that's needed -->
-<!-- END AMP -->
+ 
